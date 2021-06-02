@@ -60,6 +60,11 @@ $routes->group('admin', function($routes)
 	$routes->get('surat-keluar/insert', 'Admin\SuratKeluar::insert');
 	$routes->delete('surat-keluar', 'Admin\SuratKeluar::destroy');
 	$routes->get('surat-keluar/(:any)', 'Admin\SuratKeluar::edit');
+
+	// penerima surat
+	$routes->get('penerima-surat', 'Admin\PenerimaSurat::index');
+	$routes->post('penerima-surat', 'Admin\PenerimaSurat::create');
+	$routes->delete('penerima-surat', 'Admin\PenerimaSurat::destroy');
 });
 
 
