@@ -8,10 +8,10 @@
       <div class="card-header py-3">
          <div class="row">
             <div class="col-md-6">
-               <h6 class="m-0 font-weight-bold text-primary">Surat Masuk</h6>
+               <h6 class="m-0 font-weight-bold text-primary">Surat Keluar</h6>
             </div>
             <div class="col-md-6 col-sm-12 text-right">
-               <a href="/admin/surat-keluar/insert" class="btn btn-sm btn-primary">Buat Surat Masuk</a>
+               <a href="/admin/surat-keluar/insert" class="btn btn-sm btn-primary">Buat Surat Keluar</a>
             </div>
          </div>
       </div>
@@ -50,7 +50,7 @@
                                  <?= csrf_field() ?>
                                  <input type="hidden" name="_method" value="DELETE">
                                  <input type="hidden" name="nomor-surat" value="<?= $surat['nomor_surat'] ?>">
-                                 <button type="submit" class="btn btn-sm btn-danger">hapus</button>
+                                 <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('yakin hapus surat <?= $surat['penerima'] ?> : <?= $surat['perihal'] ?>?')">hapus</button>
                               </form>
                            </td>
                         </tr>

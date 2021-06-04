@@ -51,7 +51,7 @@
                                  <?= csrf_field() ?>
                                  <input type="hidden" name="_method" value="DELETE">
                                  <input type="hidden" name="nomor-surat" value="<?= $surat['nomor_surat'] ?>">
-                                 <button type="submit" class="btn btn-sm btn-danger">hapus</button>
+                                 <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('yakin hapus surat <?= $surat['penerima'] ?> : <?= $surat['perihal'] ?>?')">hapus</button>
                               </form>
                            </td>
                         </tr>

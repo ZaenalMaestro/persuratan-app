@@ -117,39 +117,47 @@ class Validation
 		],
 	];
 
-	public $registrasi = [
-		'nama' => [
-			'rules'  => 'required|max_length[50]|min_length[2]',
-			'errors' => [
-				'required'	 => 'Nama tidak boleh kosong.',
-				'max_length' => 'Nama maksimal 50 karakter',
-				'min_length' => 'Nama maksimal 2 karakter',
-			]
-		],
-		'nomor_induk' => [
-			'rules'  => 'required|integer|max_length[20]|min_length[11]',
-			'errors' => [
-				'required'	 => 'Nomor induk tidak boleh kosong.',
-				'integer'	 => 'Nomor induk harus angka numeric.',
-				'max_length' => 'Nomor induk maksimal 20 karakter',
-				'min_length' => 'Nomor induk maksimal 11 karakter',
-			]
-		],
-		'password' => [
-			'rules'  => 'required|max_length[50]|min_length[8]',
-			'errors' => [
-				'required'	 => 'Password tidak boleh kosong.',
-				'max_length' => 'Password maksimal 50 karakter',
-				'min_length' => 'Password maksimal 8 karakter',
-			]
-		],
-		'konfirmasi_password' => [
+	public $edit_penerima_surat = [
+		'nomor-induk' => [
 			'rules'  => 'required',
 			'errors' => [
-				'required'	 => 'konfirmasi password tidak boleh kosong.'
+				'required' => 'nomor induk harus diisi'
+			]
+		],
+		'nama-penerima' => [
+			'rules'  => 'required|max_length[50]|min_length[2]',
+			'errors' => [
+				'required'   => 'nama lengkap harus diisi.',
+				'max_length' => 'nama lengkap maksimal 50 karakter.',
+				'min_length' => 'nama lengkap minimal 2 karakter.'
 			]
 		]
 	];
+
+	public $penerima_surat = [
+		'nomor-induk' => [
+			'rules'  => 'required',
+			'errors' => [
+				'required' => 'nomor induk harus diisi'
+			]
+		],
+		'nama-penerima' => [
+			'rules'  => 'required|max_length[50]|min_length[2]',
+			'errors' => [
+				'required'   => 'nama lengkap harus diisi.',
+				'max_length' => 'nama lengkap maksimal 50 karakter.',
+				'min_length' => 'nama lengkap minimal 2 karakter.'
+			]
+		],
+		'password' => [
+			'rules'  => 'required|min_length[8]',
+			'errors' => [
+				'required'   => '{field} harus diisi.',
+				'min_length' => '{field} minimal 8 karakter.'
+			]
+		],
+	];
+
 
 	public $login = [
 		'username' => [

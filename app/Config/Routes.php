@@ -65,6 +65,16 @@ $routes->group('admin', function($routes)
 	$routes->get('penerima-surat', 'Admin\PenerimaSurat::index');
 	$routes->post('penerima-surat', 'Admin\PenerimaSurat::create');
 	$routes->delete('penerima-surat', 'Admin\PenerimaSurat::destroy');
+	$routes->put('penerima-surat', 'Admin\PenerimaSurat::update');
+});
+
+// ketua
+$routes->group('ketua', function($routes)
+{
+	// dashboard
+	$routes->get('/', 'Ketua\Dashboard::index');
+	$routes->get('data_surat', 'Ketua\DataSurat::index');
+	$routes->get('detail/(:any)', 'Ketua\Dashboard::show');
 });
 
 

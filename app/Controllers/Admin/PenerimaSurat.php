@@ -33,9 +33,31 @@ class PenerimaSurat extends BaseController
 	{
 		$request = $this->request->getPost();
 
+		// validasi penerima surat (unik)
+		$penerima_exist = $this->dataUser->where('nama_lengkap', $request['nama-penerima'])->first();
+		if($penerima_exist) {
+			$this->validation->setError('form-tambah', 'error');
+			$this->validation->setError('nama-penerima', 'nama penerima surat telah ada');
+			return redirect()->back()->withInput();
+		}
+
+		// validasi nomor induk (unik)
+		$nomor_induk_exist = $this->dataUser->where('nomor_induk', $request['nomor-induk'])->first();
+		if($nomor_induk_exist) {
+			$this->validation->setError('form-tambah', 'error');
+			$this->validation->setError('nomor-induk', 'nomor induk telah digunakan');
+			return redirect()->back()->withInput();
+		}
+
+		// validasi penerima surat
+		if(!$this->validation->run($request, 'penerima_surat')){
+			$this->validation->setError('form-tambah', 'error');
+			return redirect()->back()->withInput();
+		}
+
 		$data = [
 			'nomor_induk'  => $request['nomor-induk'], 
-			'password'		=> $request['password'],
+			'password'		=> password_hash($request['password'], PASSWORD_BCRYPT),
 			'nama_lengkap' => $request['nama-penerima']
 		];
 
@@ -43,6 +65,57 @@ class PenerimaSurat extends BaseController
 		$this->dataUser->insert($data);
 
 		session()->setFlashData('pesan', 'Penerima surat berhasil ditambahkan');
+		return redirect()->to('/admin/penerima-surat');
+	}
+
+	// update surat masuk
+	public function update()
+	{
+		$request = $this->request->getPost();
+
+		// jika nama penerima diubah
+		if($request['nama-penerima'] !== $request['nama-penerima-lama']) {
+			// validasi penerima surat (unik)
+			$penerima_exist = $this->dataUser->where('nama_lengkap', $request['nama-penerima'])->first();
+			if($penerima_exist) {
+				$this->validation->setError('form-edit', 'error');
+				$this->validation->setError('nama-penerima', 'nama penerima surat telah ada');
+				return redirect()->back()->withInput();
+			}
+		}
+
+		// validasi input
+		if(!$this->validation->run($request, 'edit_penerima_surat')){
+			$this->validation->setError('form-edit', 'error');
+			return redirect()->back()->withInput();
+		}
+
+
+		// jika nomor induk diubah
+		if($request['nomor-induk-lama'] !== $request['nomor-induk'])
+		{
+			// validasi nomor induk (unik)
+			$nomor_induk_exist = $this->dataUser->where('nomor_induk', $request['nomor-induk'])->first();
+			if($nomor_induk_exist) {
+				$this->validation->setError('form-edit', 'error');
+				$this->validation->setError('nomor-induk', 'nomor induk telah digunakan');
+				return redirect()->back()->withInput();
+			}
+		}
+
+		$data = [
+			'nomor_induk'  => $request['nomor-induk'], 
+			'nama_lengkap' => $request['nama-penerima']
+		];
+
+		if($request['password']){
+			$data['password'] = password_hash($request['password'], PASSWORD_BCRYPT);
+		}
+
+
+		$this->dataUser->update($request['nomor-induk-lama'], $data);
+
+		session()->setFlashData('pesan', 'Penerima surat berhasil diubah');
 		return redirect()->to('/admin/penerima-surat');
 	}
 

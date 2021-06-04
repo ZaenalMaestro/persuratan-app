@@ -49,11 +49,6 @@ class SuratKeluar extends BaseController
 		$fileSurat 	= $this->request->getFile('file-surat');
 		$nama_surat = $fileSurat->getRandomName();
 
-		// validasi input surat masuk/ keluar
-		if(!$this->validation->run($request, 'surat_masuk')){
-			return redirect()->back()->withInput();
-		}
-
 		// validasi nomor surat
 		$nomor_surat_exist = $this->suratKeluar->where('nomor_surat', $request['nomor-surat'])->first();
 		if($nomor_surat_exist) {
@@ -66,6 +61,11 @@ class SuratKeluar extends BaseController
 		$segment_surat = explode('/', $request['nomor-surat']);
 		if(count($segment_surat) !== 4) {
 			$this->validation->setError('nomor-surat', 'format surat tidak sesuai');
+			return redirect()->back()->withInput();
+		}
+
+		// validasi input surat masuk/ keluar
+		if(!$this->validation->run($request, 'surat_masuk')){
 			return redirect()->back()->withInput();
 		}
 
@@ -82,7 +82,7 @@ class SuratKeluar extends BaseController
 		$this->suratKeluar->insert($data);
 
 		// upload surat
-		// $fileSurat->move(ROOTPATH . 'public/surat/surat_keluar', $nama_surat);
+		$fileSurat->move(ROOTPATH . 'public/surat/surat_keluar', $nama_surat);
 
 		session()->setFlashData('pesan', 'Surat keluar berhasil dibuat');
 		return redirect()->to('/admin/surat-keluar');
@@ -153,7 +153,7 @@ class SuratKeluar extends BaseController
 		$this->suratKeluar->update($request['nomor-surat-lama'], $data);
 
 		// upload surat
-		// $fileSurat->move(ROOTPATH . 'public/surat/surat_masuk', $nama_surat);
+		$fileSurat->move(ROOTPATH . 'public/surat/surat_keluar', $nama_surat);
 
 		session()->setFlashData('pesan', 'Surat keluar berhasil diubah');
 		return redirect()->to('/admin/surat-keluar');

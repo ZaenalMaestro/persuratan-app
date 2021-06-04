@@ -41,7 +41,7 @@
                                  <input type="hidden" name="_method" value="DELETE">
                                  <input type="hidden" name="penerima" value="<?= $penerima['nama_lengkap'] ?>">
                                  <input type="hidden" name="nomor-induk" value="<?= $penerima['nomor_induk'] ?>">
-                                 <button type="submit" class="btn btn-sm btn-danger">hapus</button>
+                                 <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('yakin hapus <?= $penerima['nama_lengkap'] ?>?')">hapus</button>
                               </form>
                            </td>
                         </tr>
@@ -74,7 +74,7 @@
             <!-- ==== nama penerima ==== -->
             <div class="form-group">
                <label for="nama-penerima">Nama Penerima</label>
-               <input type="text" name="nama-penerima" class="form-control <?= ($validation->hasError('nama-penerima') ? 'is-invalid' : '') ?>" id="nama-penerima" placeholder="input nama penerima surat..." value="<?= old('nama-penerima') ?>">
+               <input type="text" name="nama-penerima" class="form-control <?= ($validation->hasError('nama-penerima') && $validation->hasError('form-tambah') ? 'is-invalid' : '') ?>" id="nama-penerima" placeholder="input nama penerima surat..." value="<?= $validation->hasError('form-tambah') ? old('nama-penerima') : '' ?>">
                <div class="invalid-feedback">
                   <?= $validation->getError('nama-penerima') ?> 
                </div>
@@ -83,7 +83,7 @@
             <!-- ==== Nomor Induk ==== -->
             <div class="form-group">
                <label for="nomor-induk">Nomor Induk</label>
-               <input type="text" name="nomor-induk" class="form-control <?= ($validation->hasError('nomor-induk') ? 'is-invalid' : '') ?>" id="nomor-induk" placeholder="input nomor induk..." value="<?= old('nomor-induk') ?>">
+               <input type="text" name="nomor-induk" class="form-control <?= ($validation->hasError('nomor-induk') && $validation->hasError('form-tambah') ? 'is-invalid' : '') ?>" id="nomor-induk" placeholder="input nomor induk..." value="<?= $validation->hasError('form-tambah') ? old('nomor-induk') : '' ?>">
                <div class="invalid-feedback">
                   <?= $validation->getError('nomor-induk') ?> 
                </div>
@@ -92,7 +92,7 @@
             <!-- ==== Password ==== -->
             <div class="form-group">
                <label for="password">Password</label>
-               <input type="password" name="password" class="form-control <?= ($validation->hasError('password') ? 'is-invalid' : '') ?>" id="password" placeholder="input password..." value="<?= old('password') ?>">
+               <input type="password" name="password" class="form-control <?= ($validation->hasError('password') ? 'is-invalid' : '') ?>" id="password" placeholder="input password...">
                <div class="invalid-feedback">
                   <?= $validation->getError('password') ?> 
                </div>
@@ -104,7 +104,9 @@
          <!-- === form edit ==== -->
          <form action="/admin/penerima-surat" method="post" class="d-none form-edit">
             <?= csrf_field() ?>
-            <input type="hidden" name="nomor-induk-lama" id="nomor-induk-lama">
+            <input type="hidden" name="_method" value="PUT">
+            <input type="hidden" name="nomor-induk-lama" id="nomor-induk-lama" value="<?= old('nomor-induk-lama') ?>">
+            <input type="hidden" name="nama-penerima-lama" id="penerima-surat-lama">
             <!-- ==== nama penerima ==== -->
             <div class="form-group">
                <label for="nama-penerima">Nama Penerima</label>
@@ -126,7 +128,7 @@
             <!-- ==== Password ==== -->
             <div class="form-group">
                <label for="password">Password</label>
-               <input type="password" name="password" class="form-control <?= ($validation->hasError('password') ? 'is-invalid' : '') ?>" id="input-password" placeholder="input password..." value="<?= old('password') ?>">
+               <input type="password" name="password" class="form-control <?= ($validation->hasError('password') ? 'is-invalid' : '') ?>" id="input-password" placeholder="input password...">
                <div class="invalid-feedback">
                   <?= $validation->getError('password') ?> 
                </div>
@@ -153,16 +155,30 @@
    });
 
    // tampil modal jika validasi error
-   <?php if($validation->getError('penerima')) : ?>
+   <?php if($validation->hasError('form-edit')) : ?>
       $(window).on('load', function() {
          $('#disposisiModal').modal('show');
+         showFormEdit()
+         document.addEventListener('click', (e) => {
+            if (e.target.classList.contains('btn-edit')){
+               input_nomor_induk.classList.remove('is-invalid')
+               input_nama_penerima.classList.remove('is-invalid')
+               input_password.classList.remove('is-invalid')
+            }
+         })
       });
-
-      // hilangkan pesan error jika user memeilih penerima
-      const penerima = document.getElementById('penerima')
-      penerima.addEventListener('change', () => {
-         penerima.classList.remove('is-invalid')
-      })
+   <?php elseif($validation->hasError('form-tambah')) : ?>
+      $(window).on('load', function() {
+         $('#disposisiModal').modal('show');
+         showFormTambah()
+         document.addEventListener('click', (e) => {
+            if (e.target.classList.contains('btn-edit')){
+               input_nomor_induk.classList.remove('is-invalid')
+               input_nama_penerima.classList.remove('is-invalid')
+               input_password.classList.remove('is-invalid')
+            }
+         })
+      });
    <?php endif ?>
 </script>
 

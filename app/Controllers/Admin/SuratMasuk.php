@@ -74,7 +74,7 @@ class SuratMasuk extends BaseController
 			'tanggal' 		=> htmlspecialchars($request['tanggal']),
 			'penerima' 		=> htmlspecialchars($request['penerima']),
 			'perihal' 		=> htmlspecialchars($request['perihal']),
-			'file_surat' 	=> $fileSurat->getRandomName(),
+			'file_surat' 	=> $nama_surat,
 			'disposisi' 	=> 'menunggu'
 		];
 
@@ -82,7 +82,7 @@ class SuratMasuk extends BaseController
 		$this->suratMasuk->insert($data);
 
 		// upload surat
-		// $fileSurat->move(ROOTPATH . 'public/surat/surat_masuk', $fileSurat->getRandomName());
+		$fileSurat->move(ROOTPATH . 'public/surat/surat_masuk', $nama_surat);
 
 		session()->setFlashData('pesan', 'Surat masuk berhasil dibuat');
 		return redirect()->to('/admin/surat-masuk');
@@ -151,7 +151,7 @@ class SuratMasuk extends BaseController
 		$this->suratMasuk->update($request['nomor-surat-lama'], $data);
 
 		// upload surat
-		// $fileSurat->move(ROOTPATH . 'public/surat/surat_masuk', $nama_surat);
+		$fileSurat->move(ROOTPATH . 'public/surat/surat_masuk', $nama_surat);
 
 		session()->setFlashData('pesan', 'Surat masuk berhasil diubah');
 		return redirect()->to('/admin/surat-masuk');

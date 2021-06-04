@@ -25,26 +25,39 @@
          <span>Dashboard</span></a>
    </li>
 
+   <!-- Nav Item - dashboard -->
+   <?php if(strtolower($role) == 'ketua' || strtolower($role) == 'user') : ?>
+      <li class="nav-item <?= ($active_link == 'data_surat') ? 'active' : '' ?>">
+         <a class="nav-link" href="/<?= strtolower($role) ?>/data_surat">
+            <i class="fas fa-envelope"></i>
+            <span>Data Surat</span></a>
+      </li>
+   <?php endif ?>
+
    <!-- === nav item data surat === -->
-   <li class="nav-item <?= ($active_link == 'surat_masuk' || $active_link == 'surat_keluar') ? 'active' : '' ?>">
-      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-         <i class="fas fa-envelope"></i>
-         <span>Surat</span>
-      </a>
-      <div id="collapseTwo" class="collapse <?= ($active_link == 'surat_masuk' || $active_link == 'surat_keluar') ? 'show' : '' ?>" aria-labelledby="headingTwo" data-parent="#accordionSidebar" style="">
-         <div class="bg-white py-2 collapse-inner rounded">
-         <a class="collapse-item <?= ($active_link == 'surat_masuk') ? 'active' : '' ?>" href="/<?= strtolower($role) ?>/surat-masuk">Surat Masuk</a>
-         <a class="collapse-item <?= ($active_link == 'surat_keluar') ? 'active' : '' ?>" href="/<?= strtolower($role) ?>/surat-keluar">Surat Keluar</a>
+   <?php if(strtolower($role) == 'admin' || strtolower($role) == 'sekertaris') : ?>
+      <li class="nav-item <?= ($active_link == 'surat_masuk' || $active_link == 'surat_keluar') ? 'active' : '' ?>">
+         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+            <i class="fas fa-envelope"></i>
+            <span>Surat</span>
+         </a>
+         <div id="collapseTwo" class="collapse <?= ($active_link == 'surat_masuk' || $active_link == 'surat_keluar') ? 'show' : '' ?>" aria-labelledby="headingTwo" data-parent="#accordionSidebar" style="">
+            <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item <?= ($active_link == 'surat_masuk') ? 'active' : '' ?>" href="/<?= strtolower($role) ?>/surat-masuk">Surat Masuk</a>
+            <a class="collapse-item <?= ($active_link == 'surat_keluar') ? 'active' : '' ?>" href="/<?= strtolower($role) ?>/surat-keluar">Surat Keluar</a>
+            </div>
          </div>
-      </div>
-   </li>
+      </li>
+   <?php endif ?>
 
    <!-- Nav Item - penerima surat -->
-   <li class="nav-item <?= ($active_link == 'penerima_surat') ? 'active' : '' ?>">
-      <a class="nav-link" href="/<?= strtolower($role) ?>/penerima-surat">
-         <i class="fas fa-user"></i>
-         <span>Penerima Surat</span></a>
-   </li>
+   <?php if(strtolower($role) == 'admin') : ?>
+      <li class="nav-item <?= ($active_link == 'penerima_surat') ? 'active' : '' ?>">
+         <a class="nav-link" href="/<?= strtolower($role) ?>/penerima-surat">
+            <i class="fas fa-user"></i>
+            <span>Penerima Surat</span></a>
+      </li>
+   <?php endif ?>
 
    <!-- Nav Item - keluar -->
    <li class="nav-item">
