@@ -49,7 +49,7 @@ class PenerimaSurat extends BaseController
 			return redirect()->back()->withInput();
 		}
 
-		// validasi penerima surat
+		// validasi penerima surat (semua input)
 		if(!$this->validation->run($request, 'penerima_surat')){
 			$this->validation->setError('form-tambah', 'error');
 			return redirect()->back()->withInput();
@@ -58,7 +58,8 @@ class PenerimaSurat extends BaseController
 		$data = [
 			'nomor_induk'  => $request['nomor-induk'], 
 			'password'		=> password_hash($request['password'], PASSWORD_BCRYPT),
-			'nama_lengkap' => $request['nama-penerima']
+			'nama_lengkap' => $request['nama-penerima'],
+			'level'			=> 'user'
 		];
 
 
@@ -82,6 +83,12 @@ class PenerimaSurat extends BaseController
 				$this->validation->setError('nama-penerima', 'nama penerima surat telah ada');
 				return redirect()->back()->withInput();
 			}
+
+			// ubah penerima ditabel surat masuk dan surat keluar
+			$penerima_lama = $request['nama-penerima-lama'];
+			$penerima_baru = $request['nama-penerima'];
+			$this->suratMasuk->updateData($penerima_lama, $penerima_baru);
+			$this->suratKeluar->updateData($penerima_lama, $penerima_baru);
 		}
 
 		// validasi input

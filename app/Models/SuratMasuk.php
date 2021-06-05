@@ -17,4 +17,19 @@ class SuratMasuk extends Model
       'file_surat',
       'disposisi',
    ];
+
+   // update surat masuk (penerima surat masuk) jika data_user (nama lengkap) diubah
+   public function updateData($penerima_lama, $penerima_baru)
+   {
+      $db      = \Config\Database::connect();
+      $builder = $db->table($this->table);
+
+      $data = [
+         'penerima' => $penerima_baru
+      ];
+     
+      $builder->where('penerima', $penerima_lama);
+      $builder->update($data);
+   }
+
 }

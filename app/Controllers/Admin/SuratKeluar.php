@@ -147,13 +147,13 @@ class SuratKeluar extends BaseController
 
 		if($fileSurat->getSize() > 0) {
 			$data['file_surat'] = $nama_surat;
+			// upload surat
+			$fileSurat->move(ROOTPATH . 'public/surat/surat_keluar', $nama_surat);
 		}
 
 		// insert surat masuk
 		$this->suratKeluar->update($request['nomor-surat-lama'], $data);
 
-		// upload surat
-		$fileSurat->move(ROOTPATH . 'public/surat/surat_keluar', $nama_surat);
 
 		session()->setFlashData('pesan', 'Surat keluar berhasil diubah');
 		return redirect()->to('/admin/surat-keluar');

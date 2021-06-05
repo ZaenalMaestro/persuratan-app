@@ -68,6 +68,30 @@ $routes->group('admin', function($routes)
 	$routes->put('penerima-surat', 'Admin\PenerimaSurat::update');
 });
 
+// Sskertaris
+$routes->group('sekertaris', function($routes)
+{
+	// dashboard
+	$routes->get('/', 'Sekertaris\Dashboard::index');	
+	$routes->post('/', 'Sekertaris\Dashboard::disposisi');	
+
+	// surat masuk
+	$routes->get('surat-masuk', 'Sekertaris\SuratMasuk::index');
+	$routes->post('surat-masuk', 'Sekertaris\SuratMasuk::create');
+	$routes->put('surat-masuk', 'Sekertaris\SuratMasuk::update');
+	$routes->get('surat-masuk/insert', 'Sekertaris\SuratMasuk::insert');
+	$routes->delete('surat-masuk', 'Sekertaris\SuratMasuk::destroy');
+	$routes->get('surat-masuk/(:any)', 'Sekertaris\SuratMasuk::edit');
+
+	// surat keluar
+	$routes->get('surat-keluar', 'Sekertaris\SuratKeluar::index');
+	$routes->post('surat-keluar', 'Sekertaris\SuratKeluar::create');
+	$routes->put('surat-keluar', 'Sekertaris\SuratKeluar::update');
+	$routes->get('surat-keluar/insert', 'Sekertaris\SuratKeluar::insert');
+	$routes->delete('surat-keluar', 'Sekertaris\SuratKeluar::destroy');
+	$routes->get('surat-keluar/(:any)', 'Sekertaris\SuratKeluar::edit');
+});
+
 // ketua
 $routes->group('ketua', function($routes)
 {
