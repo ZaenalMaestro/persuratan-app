@@ -25,7 +25,7 @@ class DataSurat extends BaseController
 
 		// filter data surat hari ini
 		$suratHariIni = array_filter($surat, function($data) {
-			return ($data['penerima'] == 'Ketua 1' && $data['disposisi'] == 'disposisi');
+			return ($data['penerima'] == session('nama') && $data['disposisi'] == 'disposisi');
 		});
 
 		// menampilkan data surat yang telah disposisi

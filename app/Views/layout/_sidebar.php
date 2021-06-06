@@ -3,9 +3,10 @@
    <!-- Sidebar - Brand -->
    <a class="sidebar-brand d-flex align-items-center justify-content-center my-4" href="index.html">
       <div class="sidebar-brand-icon mt-5">
-         <h5 class="font-weight-bolder"><?= strtoupper($role) ?></h5>
-         <?php if(session('role') == 'user') : ?>
-            <div class="sidebar-brand-text mx-1"><?= session('nama') ?></div>
+         <?php if(session('role') == 'Ketua') : ?>
+            <h5 class="font-weight-bolder"><?= strtoupper($role) ?></h5>
+         <?php else : ?>
+            <h5 class="font-weight-bolder"><?= strtoupper(session('nama')) ?></h5>
          <?php endif ?>
       </div>
    </a>

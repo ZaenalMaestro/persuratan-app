@@ -34,12 +34,12 @@ $routes->setAutoRoute(false);
 // route since we don't have to scan directories.
 
 // login
-$routes->get('/', 'Login::index', ['filter' => 'isLogin']);
-// $routes->post('/login', 'Login::signIn', ['filter' => 'isLogin']);
-// $routes->get('/logout', 'Login::logOut');
+$routes->get('/', 'Login::index', ['filter' => 'login']);
+$routes->post('/login', 'Login::signIn', ['filter' => 'login']);
+$routes->get('/logout', 'Login::logOut');
 
 // admin
-$routes->group('admin', function($routes)
+$routes->group('admin', ['filter' => 'admin'], function($routes)
 {
 	// dashboard
 	$routes->get('/', 'Admin\Dashboard::index');	
@@ -69,7 +69,7 @@ $routes->group('admin', function($routes)
 });
 
 // Sskertaris
-$routes->group('sekertaris', function($routes)
+$routes->group('sekertaris', ['filter' => 'sekertaris'], function($routes)
 {
 	// dashboard
 	$routes->get('/', 'Sekertaris\Dashboard::index');	
@@ -93,7 +93,7 @@ $routes->group('sekertaris', function($routes)
 });
 
 // ketua
-$routes->group('ketua', function($routes)
+$routes->group('ketua', ['filter' => 'ketua'], function($routes)
 {
 	// dashboard
 	$routes->get('/', 'Ketua\Dashboard::index');

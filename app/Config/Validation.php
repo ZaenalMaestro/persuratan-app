@@ -160,12 +160,12 @@ class Validation
 
 
 	public $login = [
-		'username' => [
-			'rules'  => 'required|max_length[20]|min_length[11]',
+		'nomor-induk' => [
+			'rules'  => 'required|max_length[20]|min_length[3]',
 			'errors' => [
-				'required'	 => '{field} tidak boleh kosong.',
-				'max_length' => '{field} maksimal 20 karakter',
-				'min_length' => '{field} minimal 11 karakter',
+				'required'	 => 'nomor induk tidak boleh kosong.',
+				'max_length' => 'nomor induk maksimal 20 karakter',
+				'min_length' => 'nomor induk minimal 3 karakter',
 			]
 		],
 		'password' => [

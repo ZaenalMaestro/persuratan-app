@@ -6,18 +6,15 @@ use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\Filters\FilterInterface;
 
-class IsLogin implements FilterInterface
+class Sekertaris implements FilterInterface
 {
    public function before(RequestInterface $request, $arguments = null)
    {
-      if(session('login')) {
-         if (session('role') == 'admin') {
-            return redirect()->to('/admin');
-         }
-         
-         if (session('role') == 'user') {
-            return redirect()->to('/user');
-         }
+      if(!session('login')) {
+         return redirect()->to('/');
+      }elseif(session('level') != 'Sekertaris') {
+         $level = strtolower(session('level'));
+         return redirect()->to("/$level");
       }
    }
 

@@ -25,7 +25,7 @@
   <div class="container">
 
     <!-- Outer Row -->
-    <div class="row justify-content-center">
+    <div class="row justify-content-center mt-5">
 
       <div class="col-xl-10 col-lg-12 col-md-9">
 
@@ -37,24 +37,14 @@
               <div class="col-lg-6">              
                 <div class="p-5">
                   <div class="text-center">
-                    <!-- ==== pesan registrasi -->
-                    <?php if(session()->getFlashData('pesan')) : ?>
-                      <div class="alert alert-success alert-dismissible fade show" role="alert">
-                      <?= session()->getFlashData('pesan') ?>
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                        </button>
-                      </div>
-                    <?php endif ?>
-                     <!-- ==== end pesan registrasi -->
                     <h1 class="h4 text-gray-900 mb-4">Login</h1>
                   </div>
                   <form class="user" action="/login" method="POST">
                     <?= csrf_field() ?>
                     <div class="form-group">
-                      <input type="text" class="form-control form-control-user <?= ($validation->hasError('username') ? 'is-invalid' : '') ?>" placeholder="Nomor induk" value="<?= old('username') ?>" name="username" placeholder="Nomor Induk">
+                      <input type="text" class="form-control form-control-user <?= ($validation->hasError('nomor-induk') ? 'is-invalid' : '') ?>" value="<?= old('nomor-induk') ?>" name="nomor-induk" placeholder="Nomor Induk">
                       <div class="invalid-feedback">
-                        <?= $validation->getError('nomor_induk') ?>
+                        <?= $validation->getError('nomor-induk') ?>
                       </div>
                     </div>
                     <div class="form-group">
@@ -65,10 +55,6 @@
                     </div>
                     <button type="submit" class="btn btn-primary btn-user btn-block">Login</button>
                   </form>
-                  <hr>
-                  <div class="text-center">
-                    Belum punya akun? <a class="normal" href="/registrasi">Silahkan daftar</a>
-                  </div>
                 </div>
               </div>
             </div>

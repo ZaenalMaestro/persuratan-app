@@ -19,9 +19,10 @@ class Filters extends BaseConfig
 		'csrf'     => CSRF::class,
 		'toolbar'  => DebugToolbar::class,
 		'honeypot' => Honeypot::class,
-		'isUser' => \App\Filters\IsUser::class,
-		'isAdmin' => \App\Filters\IsAdmin::class,
-		'isLogin' => \App\Filters\IsLogin::class,
+		'login' => \App\Filters\Login::class,
+		'admin' => \App\Filters\Admin::class,
+		'sekertaris' => \App\Filters\Sekertaris::class,
+		'ketua' => \App\Filters\Ketua::class,
 	];
 
 	/**

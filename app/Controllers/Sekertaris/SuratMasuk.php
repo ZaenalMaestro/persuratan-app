@@ -76,7 +76,7 @@ class SuratMasuk extends BaseController
 
 		$data = [
 			'nomor_surat' 	=> $request['nomor-surat'],
-			'nomor_induk' 	=> '44444',
+			'nomor_induk' 	=> session('nomor_induk'),
 			'tanggal' 		=> htmlspecialchars($request['tanggal']),
 			'penerima' 		=> htmlspecialchars($request['penerima']),
 			'perihal' 		=> htmlspecialchars($request['perihal']),

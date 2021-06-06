@@ -6,14 +6,15 @@ use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\Filters\FilterInterface;
 
-class IsAdmin implements FilterInterface
+class Admin implements FilterInterface
 {
    public function before(RequestInterface $request, $arguments = null)
    {
       if(!session('login')) {
          return redirect()->to('/');
-      }elseif(session('role') != 'admin') {
-         return redirect()->to('/' . session('role'));
+      }elseif(session('level') != 'Admin') {
+         $level = strtolower(session('level'));
+         return redirect()->to("/$level");
       }
    }
 
