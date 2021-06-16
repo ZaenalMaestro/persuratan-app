@@ -12,7 +12,7 @@ class Sekertaris implements FilterInterface
    {
       if(!session('login')) {
          return redirect()->to('/');
-      }elseif(session('level') != 'Sekertaris') {
+      }elseif(session('level') != 'sekertaris') {
          $level = strtolower(session('level'));
          return redirect()->to("/$level");
       }

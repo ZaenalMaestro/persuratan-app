@@ -12,7 +12,7 @@ class Admin implements FilterInterface
    {
       if(!session('login')) {
          return redirect()->to('/');
-      }elseif(session('level') != 'Admin') {
+      }elseif(session('level') != 'admin') {
          $level = strtolower(session('level'));
          return redirect()->to("/$level");
       }

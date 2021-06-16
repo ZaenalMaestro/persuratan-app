@@ -12,7 +12,7 @@ class Ketua implements FilterInterface
    {
       if(!session('login')) {
          return redirect()->to('/');
-      }elseif(session('level') != 'Ketua') {
+      }elseif(session('level') != 'ketua') {
          $level = strtolower(session('level'));
          return redirect()->to("/$level");
       }

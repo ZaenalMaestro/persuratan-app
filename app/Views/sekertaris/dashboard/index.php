@@ -74,7 +74,6 @@
                         <th>Tanggal Surat</th>
                         <th>Perihal</th>
                         <th>Disposisi</th>
-                        <th>Aksi</th>
                      </tr>
                   </thead>
                   <tbody>
@@ -90,11 +89,6 @@
                               <?php else : ?>
                                  <span class="text-success font-weight-bolder">-</span>
                               <?php endif ?>
-                           </td>
-                           <td>
-                              <?php if($surat['disposisi'] == 'menunggu') : ?>   
-                                 <button type="button" class="btn btn-sm btn-success btn-disposisi" data-toggle="modal" data-target="#disposisiModal" data-nomor-surat="<?= $surat['nomor_surat'] ?>">Disposisi</button>
-                                 <?php endif ?>
                            </td>
                         </tr>
                      <?php endforeach ?>

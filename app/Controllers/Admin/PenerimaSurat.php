@@ -59,7 +59,7 @@ class PenerimaSurat extends BaseController
 			'nomor_induk'  => $request['nomor-induk'], 
 			'password'		=> password_hash($request['password'], PASSWORD_BCRYPT),
 			'nama_lengkap' => $request['nama-penerima'],
-			'level'			=> 'user'
+			'level'			=> 'ketua'
 		];
 
 

@@ -33,7 +33,7 @@ class Login extends BaseController
 			if (password_verify($login['password'], $data_login['password'])) {
 				$data = [
 					'login' 			=> true,
-					'level' 			=> $data_login['level'],
+					'level' 			=> strtolower($data_login['level']),
 					'nama' 			=> $data_login['nama_lengkap'],
 					'nomor_induk' 	=> $data_login['nomor_induk']
 				];
