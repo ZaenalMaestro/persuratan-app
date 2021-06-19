@@ -20,7 +20,7 @@ class SuratKeluar extends BaseController
 		$surat = $this->suratKeluar->findAll();
 		// filter data surat sekertaris
 		$suratKeluar = array_filter($surat, function($data) {
-			return ($data['nomor_induk'] == '44444' || strtolower($data['penerima']) == 'sekertaris');
+			return ($data['nomor_induk'] == session('nomor_induk'));
 		});
 		$data = [
 			'title' 					=> 'Surat Keluar',

@@ -1,0 +1,166 @@
+.line-height-2{
+   line-height: 2;
+}
+
+.bg-foto{
+   margin-bottom: 200px;
+}
+
+
+ol.sub-misi, ol.profile{
+   margin-left: -25px;
+   padding-right: 30px;
+}
+
+ol.sub-misi li, ol.profile li{
+   padding-left: 15px;
+}
+
+/* font */
+.font-weight-5{
+   font-weight: 500;
+}
+/* font */
+.font-weight-6{
+   font-weight: 600;
+}
+/* font */
+.font-weight-7{
+   font-weight: 700;
+}
+/* font */
+.font-weight-8{
+   font-weight: 800;
+}
+
+/* ======tentang sistem========== */
+.bg-tentang-sistem {
+   background: url("../img/asset-unm/rektorat-un-makassar-3.jpg") center center no-repeat;
+   /* background-color: gray; */
+   background-size: cover;
+   padding: 60px 0;
+   position: relative;
+ }
+
+ .bg-tentang-sistem::before {
+   content: '';
+   position: absolute;
+   left: 0;
+   right: 0;
+   top: 0;
+   bottom: 0;
+   background: rgba(255, 255, 255, 0.75);
+   z-index: 9;
+ }
+ 
+ .bg-tentang-sistem .container {
+   position: relative;
+   z-index: 10;
+ }
+ 
+ .bg-tentang-sistem .member {
+   text-align: center;
+   margin-bottom: 80px;
+   position: relative;
+ }
+ 
+ .bg-tentang-sistem .member .pic {
+   overflow: hidden;
+ }
+ 
+ .bg-tentang-sistem .member .member-info {
+   position: absolute;
+   top: 85%;
+   left: 20px;
+   right: 20px;
+   background: #fff;
+   padding: 20px 0;
+   color: #364146;
+   box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
+   max-height: 95px;
+   overflow: hidden;
+   transition: max-height 0.5s ease-in-out;
+ }
+ 
+ .bg-tentang-sistem .member:hover .member-info {
+   max-height: 300px;
+ }
+ 
+ .bg-tentang-sistem .member h4 {
+   font-weight: 700;
+   margin-bottom: 10px;
+   font-size: 16px;
+   color: #364146;
+   position: relative;
+   padding-bottom: 10px;
+ }
+ 
+ .bg-tentang-sistem .member h4::after {
+   content: '';
+   position: absolute;
+   display: block;
+   width: 50px;
+   height: 1px;
+   background: #b5c1c6;
+   bottom: 0;
+   left: calc(50% - 25px);
+ }
+ 
+ .bg-tentang-sistem .member span {
+   font-style: italic;
+   display: block;
+   font-size: 13px;
+ }
+ 
+ .bg-tentang-sistem .member .social {
+   margin-top: 15px;
+ }
+ 
+ .bg-tentang-sistem .member .social a {
+   transition: color 0.3s;
+   color: #627680;
+ }
+ 
+ .bg-tentang-sistem .member .social a:hover {
+   color: #009cea;
+ }
+ 
+ .bg-tentang-sistem .member .social i {
+   font-size: 16px;
+   margin: 0 2px;
+ }
+ 
+ @media (max-width: 992px) {
+   .bg-tentang-sistem .member {
+     margin-bottom: 110px;
+   }
+ }
+
+.card-sistem{
+   margin-top: 80px;
+   z-index: 1;
+}
+@media (max-width: 575px) {
+   .card-sistem{
+      width: 250px;
+      z-index: 1;
+      margin-left: auto;
+      margin-right: auto;
+   }
+ }
+.card-sub-sistem{
+   margin-top: -125px;
+}
+/* foto 1 */
+.foto-1{
+   z-index: 2;
+   margin-top: -120px;
+}
+/* foto 2 */
+.foto-2{
+   margin-top: 130px;
+}
+
+#lightgallery img:hover{
+   opacity: 0.7;
+}

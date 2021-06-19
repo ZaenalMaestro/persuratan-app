@@ -23,6 +23,7 @@ class Filters extends BaseConfig
 		'admin' => \App\Filters\Admin::class,
 		'sekertaris' => \App\Filters\Sekertaris::class,
 		'ketua' => \App\Filters\Ketua::class,
+		'kepala' => \App\Filters\Kepala::class,
 	];
 
 	/**

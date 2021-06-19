@@ -99,7 +99,25 @@ $routes->group('ketua', ['filter' => 'ketua'], function($routes)
 	$routes->get('/', 'Ketua\Dashboard::index');
 	$routes->get('data_surat', 'Ketua\DataSurat::index');
 	$routes->get('detail/(:any)', 'Ketua\Dashboard::show');
+
+	// surat masuk
+	$routes->get('surat-masuk', 'Ketua\SuratMasuk::index');
+
+	// surat keluar
+	$routes->get('surat-keluar', 'Ketua\SuratKeluar::index');
 });
+
+// kepala
+$routes->group('kepala', ['filter' => 'kepala'], function($routes)
+{
+	// dashboard
+	$routes->get('/', 'Kepala\Dashboard::index');
+	$routes->get('data_surat', 'Kepala\DataSurat::index');
+	$routes->get('detail/(:any)', 'Kepala\Dashboard::show');
+});
+
+// portal LP2M
+$routes->get('/portal', 'Portal\PortalLP2M::index');
 
 
 

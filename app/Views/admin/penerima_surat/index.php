@@ -29,12 +29,13 @@
                   </thead>
                   <tbody>
                      <?php $no = 1; foreach($penerima_surat as $penerima) :?>
+                        <?php if($penerima['level'] == 'admin') { continue; } ?>
                         <tr class="text-center">
                            <td><?= $no++ ?></td>
                            <td class="text-left"><?= $penerima['nama_lengkap'] ?></td>
                            <td><?= $penerima['nomor_induk'] ?></td>
                            <td>
-                              <button type="button" class="btn btn-sm btn-success btn-edit" data-nama="<?= $penerima['nama_lengkap'] ?>" data-nomor-induk="<?= $penerima['nomor_induk'] ?>" data-toggle="modal" data-target="#disposisiModal">Edit</button>
+                              <button type="button" class="btn btn-sm btn-success btn-edit" data-nama="<?= $penerima['nama_lengkap'] ?>" data-level="<?= $penerima['level'] ?>" data-nomor-induk="<?= $penerima['nomor_induk'] ?>" data-toggle="modal" data-target="#disposisiModal">Edit</button>
 
                               <form action="/admin/penerima-surat" method="POST" class="d-inline">
                                  <?= csrf_field() ?>
@@ -80,6 +81,19 @@
                </div>
             </div>
 
+            <div class="form-group">
+               <label for="level">Level</label>
+               <select class="form-control <?= ($validation->hasError('level') && $validation->hasError('form-tambah') ? 'is-invalid' : '') ?>" id="level" name="level" value="<?= $validation->hasError('form-tambah') ? old('level') : '' ?>">
+                  <option value="">Pilih Level Pengguna</option>
+                  <option value="sekertaris" <?= (old('level') == 'sekertaris') ? 'selected' : '' ?>>Sekertaris</option>
+                  <option value="ketua" <?= (old('level') == 'ketua') ? 'selected' : '' ?>>Ketua</option>
+                  <option value="kepala" <?= (old('level') == 'kepala') ? 'selected' : '' ?>>Kepala</option>
+               </select>
+               <div class="invalid-feedback">
+                  <?= $validation->getError('level') ?> 
+               </div>
+            </div>
+
             <!-- ==== Nomor Induk ==== -->
             <div class="form-group">
                <label for="nomor-induk">Nomor Induk</label>
@@ -113,6 +127,20 @@
                <input type="text" name="nama-penerima" class="form-control <?= ($validation->hasError('nama-penerima') ? 'is-invalid' : '') ?>" id="input-nama-penerima" placeholder="input nama penerima surat..." value="<?= old('nama-penerima') ?>">
                <div class="invalid-feedback">
                   <?= $validation->getError('nama-penerima') ?> 
+               </div>
+            </div>
+
+            <!-- level -->
+            <div class="form-group">
+               <label for="input-level">Level</label>
+               <select class="form-control <?= ($validation->hasError('level') ? 'is-invalid' : '') ?>" id="input-level" name="level" value="<?= $validation->hasError('form-tambah') ? old('level') : '' ?>">
+                  <option value="">Pilih Level Pengguna</option>
+                  <option id="opt-sekertaris" value="sekertaris" <?= ($validation->hasError('form-edit') && old('level') == 'sekertaris') ? 'selected' : '' ?>>Sekertaris</option>
+                  <option id="opt-ketua" value="ketua" <?= ($validation->hasError('form-edit') && old('level') == 'ketua') ? 'selected' : '' ?>>Ketua</option>
+                  <option id="opt-kepala" value="kepala" <?= ($validation->hasError('form-edit') && old('level') == 'kepala') ? 'selected' : '' ?>>Kepala</option>
+               </select>
+               <div class="invalid-feedback">
+                  <?= $validation->getError('level') ?> 
                </div>
             </div>
 

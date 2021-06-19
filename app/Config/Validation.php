@@ -141,6 +141,12 @@ class Validation
 				'required' => 'nomor induk harus diisi'
 			]
 		],
+		'level' => [
+			'rules'  => 'required',
+			'errors' => [
+				'required' => 'level pengguna harus dipilih'
+			]
+		],
 		'nama-penerima' => [
 			'rules'  => 'required|max_length[50]|min_length[2]',
 			'errors' => [

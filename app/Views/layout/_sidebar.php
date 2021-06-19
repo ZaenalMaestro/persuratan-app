@@ -27,7 +27,7 @@
    </li>
 
    <!-- Nav Item - dashboard -->
-   <?php if(strtolower($role) == 'ketua' || strtolower($role) == 'user') : ?>
+   <?php if(strtolower($role) == 'ketua' || strtolower($role) == 'kepala') : ?>
       <li class="nav-item <?= ($active_link == 'data_surat') ? 'active' : '' ?>">
          <a class="nav-link" href="/<?= strtolower($role) ?>/data_surat">
             <i class="fas fa-envelope"></i>
@@ -36,7 +36,7 @@
    <?php endif ?>
 
    <!-- === nav item data surat === -->
-   <?php if(strtolower($role) == 'admin' || strtolower($role) == 'sekertaris') : ?>
+   <?php if(strtolower($role) != 'kepala') : ?>
       <li class="nav-item <?= ($active_link == 'surat_masuk' || $active_link == 'surat_keluar') ? 'active' : '' ?>">
          <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
             <i class="fas fa-envelope"></i>
