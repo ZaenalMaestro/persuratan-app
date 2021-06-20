@@ -41,7 +41,8 @@
                               <?php endif ?>
                            </td>
                            <td>
-                              <a href="/ketua/detail/<?= $surat['nomor_surat'] ?>" class="btn btn-sm btn-success">detail</a>
+                              <!-- tombol download -->
+                              <a href="/surat/<?= $folder ?>/<?= $surat['file_surat'] ?>" target="_blank" class="btn btn-success btn-sm">Download Surat</a>
                            </td>
                         </tr>
                      <?php endforeach ?>

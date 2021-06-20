@@ -16,15 +16,13 @@ class SuratMasuk extends BaseController
 	public function index()
 	{
 		$surat = $this->suratMasuk->findAll();
-		// filter data surat sekertaris
-		$suratMasuk = array_filter($surat, function($data) {
-			return ($data['penerima'] == session('nama'));
-		});
+
 		$data = [
 			'title' 					=> 'Surat Masuk',
 			'role' 					=> 'Ketua',
 			'active_link' 			=> 'surat_masuk',
-			'surat_hari_ini'		=> $suratMasuk,
+			'surat_hari_ini'		=> $surat,
+			'folder'					=> 'surat_masuk'
 		];
 
 		return view('ketua/surat_masuk/index', $data);

@@ -17,14 +17,13 @@ class SuratKeluar extends BaseController
 	{
 		$surat = $this->suratKeluar->findAll();
 		// filter data surat sekertaris
-		$suratKeluar = array_filter($surat, function($data) {
-			return ($data['penerima'] == session('nama'));
-		});
+
 		$data = [
 			'title' 					=> 'Surat Keluar',
 			'role' 					=> 'Ketua',
 			'active_link' 			=> 'surat_keluar',
-			'surat_hari_ini'		=> $suratKeluar,
+			'surat_hari_ini'		=> $surat,
+			'folder'					=> 'surat_keluar'
 		];
 
 		return view('ketua/surat_keluar/index', $data);
