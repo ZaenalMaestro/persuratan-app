@@ -51,6 +51,7 @@ $routes->group('admin', ['filter' => 'admin'], function($routes)
 	$routes->put('surat-masuk', 'Admin\SuratMasuk::update');
 	$routes->get('surat-masuk/insert', 'Admin\SuratMasuk::insert');
 	$routes->delete('surat-masuk', 'Admin\SuratMasuk::destroy');
+	$routes->get('surat-masuk/print', 'Admin\SuratMasuk::printSurat');
 	$routes->get('surat-masuk/(:any)', 'Admin\SuratMasuk::edit');
 
 	// surat keluar
@@ -59,6 +60,7 @@ $routes->group('admin', ['filter' => 'admin'], function($routes)
 	$routes->put('surat-keluar', 'Admin\SuratKeluar::update');
 	$routes->get('surat-keluar/insert', 'Admin\SuratKeluar::insert');
 	$routes->delete('surat-keluar', 'Admin\SuratKeluar::destroy');
+	$routes->get('surat-keluar/print', 'Admin\SuratKeluar::printSurat');
 	$routes->get('surat-keluar/(:any)', 'Admin\SuratKeluar::edit');
 
 	// penerima surat
@@ -81,6 +83,7 @@ $routes->group('sekertaris', ['filter' => 'sekertaris'], function($routes)
 	$routes->put('surat-masuk', 'Sekertaris\SuratMasuk::update');
 	$routes->get('surat-masuk/insert', 'Sekertaris\SuratMasuk::insert');
 	$routes->delete('surat-masuk', 'Sekertaris\SuratMasuk::destroy');
+	$routes->get('surat-masuk/print', 'Sekertaris\SuratMasuk::printSurat');
 	$routes->get('surat-masuk/(:any)', 'Sekertaris\SuratMasuk::edit');
 
 	// surat keluar
@@ -89,6 +92,7 @@ $routes->group('sekertaris', ['filter' => 'sekertaris'], function($routes)
 	$routes->put('surat-keluar', 'Sekertaris\SuratKeluar::update');
 	$routes->get('surat-keluar/insert', 'Sekertaris\SuratKeluar::insert');
 	$routes->delete('surat-keluar', 'Sekertaris\SuratKeluar::destroy');
+	$routes->get('surat-keluar/print', 'Sekertaris\SuratKeluar::printSurat');
 	$routes->get('surat-keluar/(:any)', 'Sekertaris\SuratKeluar::edit');
 });
 
@@ -102,9 +106,11 @@ $routes->group('ketua', ['filter' => 'ketua'], function($routes)
 
 	// surat masuk
 	$routes->get('surat-masuk', 'Ketua\SuratMasuk::index');
+	$routes->get('surat-masuk/print', 'Ketua\SuratMasuk::printSurat');
 
 	// surat keluar
 	$routes->get('surat-keluar', 'Ketua\SuratKeluar::index');
+	$routes->get('surat-keluar/print', 'Ketua\SuratKeluar::printSurat');
 });
 
 // kepala

@@ -11,6 +11,7 @@
                <h6 class="m-0 font-weight-bold text-primary">Surat Keluar</h6>
             </div>
             <div class="col-md-6 col-sm-12 text-right">
+               <a href="/admin/surat-keluar/print" target="_blank" class="btn btn-sm btn-success mr-2">Print Surat Keluar</a>
                <a href="/admin/surat-keluar/insert" class="btn btn-sm btn-primary">Buat Surat Keluar</a>
             </div>
          </div>

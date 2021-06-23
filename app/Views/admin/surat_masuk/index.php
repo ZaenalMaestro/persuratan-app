@@ -11,6 +11,7 @@
                <h6 class="m-0 font-weight-bold text-primary">Surat Masuk</h6>
             </div>
             <div class="col-md-6 col-sm-12 text-right">
+               <a href="/admin/surat-masuk/print" target="_blank" class="btn btn-sm btn-success mr-2">Print Surat Masuk</a>
                <a href="/admin/surat-masuk/insert" class="btn btn-sm btn-primary">Buat Surat Masuk</a>
             </div>
          </div>

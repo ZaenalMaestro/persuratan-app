@@ -2,7 +2,7 @@
 namespace App\Controllers\Admin;
 use App\Controllers\BaseController;
 
-use App\Models\PenelitianModel as Penelitian;
+use Dompdf\Dompdf;
 
 class SuratMasuk extends BaseController
 {
@@ -164,5 +164,28 @@ class SuratMasuk extends BaseController
 
 		session()->setFlashData('pesan', 'Surat masuk berhasil dihapus!');
 		return redirect()->back();
+	}
+
+	// print surat masuk
+	public function printSurat()
+	{
+		$data = [
+			'surat'		=>  $this->suratMasuk->findAll(),
+			'judul'	=> 'Laporan Surat Masuk'
+		];
+		// return view('admin/surat_masuk/print_surat_masuk', $data);
+		$html =  view('admin/surat_masuk/print_surat_masuk', $data);
+		
+		// instantiate and use the dompdf class
+		$dompdf = new Dompdf();
+		$dompdf->loadHtml($html);
+		// (Optional) Setup the paper size and orientation
+		$dompdf->setPaper('A4', 'portair');
+
+		// Render the HTML as PDF
+		$dompdf->render();
+
+		// Output the generated PDF to Browser
+		$dompdf->stream(date("Y-m-d") . '_print_surat_masuk.pdf');
 	}
 }

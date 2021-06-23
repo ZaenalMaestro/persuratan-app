@@ -7,8 +7,11 @@
    <div class="card shadow mb-4">
       <div class="card-header py-3">
          <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-10">
                <h6 class="m-0 font-weight-bold text-primary">Surat Keluar</h6>
+            </div>
+            <div class="col-md-2 text-right">
+               <a href="/ketua/surat-keluar/print" target="_blank" class="btn btn-sm btn-success">Print Surat Keluar</a>
             </div>
          </div>
       </div>
