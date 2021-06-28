@@ -68,6 +68,15 @@ $routes->group('admin', ['filter' => 'admin'], function($routes)
 	$routes->post('penerima-surat', 'Admin\PenerimaSurat::create');
 	$routes->delete('penerima-surat', 'Admin\PenerimaSurat::destroy');
 	$routes->put('penerima-surat', 'Admin\PenerimaSurat::update');
+
+	// template surat
+	$routes->get('template', 'Admin\TemplateSurat::index');
+	$routes->get('template/all', 'Admin\TemplateSurat::allTemplate');
+	$routes->deLete('template', 'Admin\TemplateSurat::destroy');
+	$routes->get('template/create', 'Admin\TemplateSurat::create');
+	$routes->post('template/insert', 'Admin\TemplateSurat::insert');
+	$routes->get('template/edit/(:num)', 'Admin\TemplateSurat::edit/$1');
+	$routes->put('template/update', 'Admin\TemplateSurat::update');
 });
 
 // Sskertaris

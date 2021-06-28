@@ -7,6 +7,7 @@
     "test": "tests"
   },
   "dependencies": {
+    "axios": "^0.21.1",
     "clipboard": "^2.0.8"
   },
   "devDependencies": {},

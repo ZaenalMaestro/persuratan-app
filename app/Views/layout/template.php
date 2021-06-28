@@ -1,4 +1,5 @@
 <?= $this->include('layout/_header'); ?>
+<?= $this->renderSection('css') ?>
 
 
 <!-- sidebar -->

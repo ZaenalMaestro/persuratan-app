@@ -21,15 +21,14 @@ class Dashboard extends BaseController
 		// menggabungkan semua surat masuk dan keluar
 		$suratMasuk 	= $this->suratMasuk->findAll();
 		$suratKeluar 	= $this->suratKeluar->findAll();
-		$surat 			= array_merge($suratMasuk, $suratKeluar);
 
 		// filter data surat hari ini
-		$suratHariIni = array_filter($surat, function($data) {
+		$suratHariIni = array_filter($suratMasuk, function($data) {
 			return ($data['tanggal'] == date('Y-m-d'));
 		});
 
 		// menampilkan data surat yang telah disposisi
-		$disposisi = array_filter($surat, function($data) {
+		$disposisi = array_filter($suratMasuk, function($data) {
 			return ($data['disposisi'] == 'disposisi');
 		});
 
