@@ -22,37 +22,38 @@
                <table id="data-surat" class="table table-bordered table-hover" style="width:100%">
                   <thead>
                      <tr class="text-center">
-                        <th>No</th>
-                        <th>Nama</th>
-                        <th>Tanggal Surat</th>
+                        <th>No.</th>
+                        <th>Tanggal</th>
+                        <th>Nomor Surat</th>
                         <th>Perihal</th>
-                        <th>Disposisi</th>
+                        <th>Penerima</th>
+                        <th>status</th>
                         <th>Aksi</th>
                      </tr>
                   </thead>
                   <tbody>
                      <?php $no = 1; foreach($surat_hari_ini as $surat) :?>
                         <tr class="text-center">
-                           <td><?= $no++ ?></td>
-                           <td><?= $surat['penerima'] ?></td>
-                           <td><?= $surat['tanggal'] ?></td>
-                           <td width="30%"><?= $surat['perihal'] ?></td>
-                           <td>
-                              <?php if($surat['disposisi'] == 'disposisi') : ?>
-                                 <span class="text-success font-weight-bolder">&#10003;</span>
+                           <td width="1%"><?= $no++ ?></td>
+                           <td width="13%"><?= $surat['tanggal_surat'] ?></td>
+                           <td width="20%"><?= $surat['nomor_surat'] ?></td>
+                           <td><?= $surat['perihal'] ?></td>
+                           <td width=""><?= $surat['penerima'] ?></td>
+                           <td width=""><?= $surat['status_komentar'] ?></td>
+                           <td width="15%">
+                              <?php if($surat['status_komentar'] == 'diterima') :?>
+                                 <button type="button" disabled class="btn btn-sm btn-secondary">Review</button>
+                                 <button type="button" disabled class="btn btn-sm btn-secondary">Terima</button>
                               <?php else : ?>
-                                 <span class="text-success font-weight-bolder">-</span>
-                              <?php endif ?>
-                           </td>
-                           <td>
-                              <a href="/sekertaris/surat-keluar/<?= $surat['nomor_surat'] ?>" class="btn btn-sm btn-success">Edit</a>
+                                 <a href="/sekertaris/surat-keluar/<?= $surat['id'] ?>" class="btn btn-sm btn-primary">Review</a>
 
-                              <form action="/sekertaris/surat-keluar" method="POST" class="d-inline">
-                                 <?= csrf_field() ?>
-                                 <input type="hidden" name="_method" value="DELETE">
-                                 <input type="hidden" name="nomor-surat" value="<?= $surat['nomor_surat'] ?>">
-                                 <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('yakin hapus surat <?= $surat['penerima'] ?> : <?= $surat['perihal'] ?>?')">hapus</button>
-                              </form>
+                                 <form action="/sekertaris/surat-keluar/terima" method="POST" class="d-inline">
+                                    <?= csrf_field() ?>
+                                    <input type="hidden" name="_method" value="PUT">
+                                    <input type="hidden" name="id" value="<?= $surat['id'] ?>">
+                                    <button type="submit" class="btn btn-sm btn-success" onclick="return confirm('yakin terima surat keluar?')">Terima</button>
+                                 </form>
+                              <?php endif; ?>
                            </td>
                         </tr>
                      <?php endforeach ?>

@@ -51,21 +51,22 @@
       </li>
    <?php endif ?>
 
-   <!-- Nav Item - penerima surat -->
-   <?php if(strtolower($role) == 'admin') : ?>
-      <li class="nav-item <?= ($active_link == 'penerima_surat') ? 'active' : '' ?>">
-         <a class="nav-link" href="/<?= strtolower($role) ?>/penerima-surat">
-            <i class="fas fa-user"></i>
-            <span>Penerima Surat</span></a>
-      </li>
-   <?php endif ?>
-
    <!-- Nav Item - buat tempate surat -->
    <?php if(strtolower($role) == 'admin') : ?>
       <li class="nav-item <?= ($active_link == 'template_surat') ? 'active' : '' ?>">
          <a class="nav-link" href="/<?= strtolower($role) ?>/template">
             <i class="fas fa-fw fa-table"></i>
             <span>Template Surat</span></a>
+      </li>
+   <?php endif ?>
+
+   
+   <!-- Nav Item - penerima surat -->
+   <?php if(strtolower($role) == 'admin') : ?>
+      <li class="nav-item <?= ($active_link == 'penerima_surat') ? 'active' : '' ?>">
+         <a class="nav-link" href="/<?= strtolower($role) ?>/penerima-surat">
+            <i class="fas fa-user"></i>
+            <span>Penerima Surat</span></a>
       </li>
    <?php endif ?>
 

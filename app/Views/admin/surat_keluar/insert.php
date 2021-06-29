@@ -1,80 +1,62 @@
 <?= $this->extend('layout/template') ?>
 
+<?= $this->section('css') ?>
+   <link rel="stylesheet" href="/ckeditor5/editor-style.css">
+   <link rel="stylesheet" href="/ckeditor5/style.css">
+<?= $this->endSection() ?>
+
 <?= $this->section('content') ?>
 
 <div class="row">
-   <div class="col">
+   <div class="col-lg-9">
    <div class="card shadow mb-4">
       <div class="card-header py-3">
-         <h6 class="m-0 font-weight-bold text-primary">Form Input Surat Keluar</h6>
+         <h6 class="m-0 font-weight-bold text-primary">Buat Surat Keluar</h6>
       </div>
-      <div class="card-body">
-         <!-- ==== form ==== -->
-         <form action="/admin/surat-keluar" method="POST" enctype="multipart/form-data">
-            <?= csrf_field() ?>
-            <!-- ==== nomor surat ==== -->
+      <div class="card-body mx-5">
+         <!-- ==== form ==== -->         
+         <form>
+            <!-- nomor surat -->
             <div class="form-group">
-               <label for="nomorSurat">Nomor Surat</label>
-               <input type="text" name="nomor-surat" class="form-control <?= ($validation->hasError('nomor-surat') ? 'is-invalid' : '') ?>" id="nomorSurat" placeholder="input nomor surat..." value="<?= old('nomor-surat') ?>">
-               <div class="invalid-feedback">
-                  <?= $validation->getError('nomor-surat') ?>
-               </div>
-            </div>
-
-            <!-- ==== tanggal ==== -->
-            <div class="form-group">
-               <label for="tanggal">Tanggal</label>
-               <input type="date" name="tanggal" class="form-control <?= ($validation->hasError('tanggal') ? 'is-invalid' : '') ?>" id="tanggal" placeholder="input tanggal surat..." value="<?= old('tanggal') ?>">
-               <div class="invalid-feedback">
-                  <?= $validation->getError('tanggal') ?> 
-               </div>
+               <label for="exampleFormControlInput1">Nomor Surat</label>
+               <input type="text" id="nomor-surat" class="form-control" placeholder="Nomor surat" value="<?= $nomor_surat ?>" disabled>
             </div>
             
-            <!-- === penerima surat === -->
+            <!-- tanggal surat -->
             <div class="form-group">
-               <label for="penerima">Penerima Surat</label>
-               <select class="form-control <?= ($validation->hasError('penerima') ? 'is-invalid' : '') ?>" id="penerima" name="penerima">
-                  <option value="">Pilih Penerima</option>
-                  <?php foreach($penerima_surat as $penerima) : ?>
-                     <?php if(strtolower($penerima['nama_lengkap']) !== 'operator' ) : ?>
-                        <option value="<?= $penerima['nama_lengkap'] ?>"><?= $penerima['nama_lengkap'] ?></option>
-                     <?php endif; ?>
+               <label for="exampleFormControlInput1">Tanggal Surat</label>
+               <input type="date" id="tanggal-surat" class="form-control" placeholder="Tanggal surat" require autofocus>
+            </div>
+
+            <!-- penerima surat -->
+            <div class="form-group">
+               <label for="exampleFormControlInput1">Penerima Surat</label>
+               <input type="text" id="penerima-surat" class="form-control" placeholder="Penerima surat" require>
+            </div>
+            <!-- perihal surat -->
+            <div class="form-group">
+               <label for="exampleFormControlInput1">Perihal Surat</label>
+               <input type="text" id="perihal-surat" class="form-control" placeholder="Perihal surat" require>
+            </div>
+
+            <div class="form-group">
+               <label for="exampleFormControlSelect1" require>Pilih Template Surat</label>
+               <select class="form-control" id="pilih-template">
+                  <option value="">Pilih template surat</option>
+                  <?php foreach($templates as $template) : ?>
+                     <option value="<?= $template['id'] ?>"><?= $template['nama_template'] ?></option>
                   <?php endforeach ?>
                </select>
-               <div class="invalid-feedback">
-                     <?= $validation->getError('penerima') ?>
-               </div>
             </div>
 
-            <!-- ==== perihal ==== -->
-            <div class="form-group">
-               <label for="perihal">Perihal</label>
-               <input type="text" name="perihal" class="form-control <?= ($validation->hasError('perihal') ? 'is-invalid' : '') ?>" id="perihal" placeholder="input perihal surat..." value="<?= old('perihal') ?>">
-               <div class="invalid-feedback">
-                  <?= $validation->getError('perihal') ?> 
-               </div>
+            <!-- input template -->
+            <div class="form-group template-container">
+               <label for="exampleFormControlTextarea1">Isi Surat</label>
+               <div id="toolbar-container"></div>
+               <!-- This container will become the editable. -->
+               <div id="editor"></div>
             </div>
-
-            <!-- ==== File surat ==== -->
-            <!-- ==== file Jurnal ==== -->
-            <div class="form-group">
-               <label for="fileSurat">File Surat</label>
-               <div class="custom-file">
-                  <input type="file" class="custom-file-input <?= ($validation->hasError('jurnal') ? 'is-invalid' : '') ?>" name="file-surat" id="fileSurat"
-                     aria-describedby="inputGroupFileAddon01" value="<?= old('file-surat') ?>">
-                  <label class="custom-file-label file-surat" for="file-surat">Pilih file surat</label>
-               </div>
-               <small class="text-danger mt-1 text-small <?= ($validation->hasError('file-surat') ? 'd-block' : 'd-none') ?>">
-                  <?= $validation->getError('file-surat') ?>
-               </small>
-            </div>
-
-            <!-- tombol buat surat  -->
-            <div class="row my-4">
-               <div class="col text-right">
-                  <button type="submit" class="btn btn-primary">Buat Surat keluar</button>
-               </div>
-            </div>
+            <button type="button" id="submit" class="btn btn-md btn-primary btn-block">Simoan Surat Keluar</button>
          </form>
          <!-- ==== end form ==== -->
       </div>
@@ -82,19 +64,109 @@
    </div>
 </div>
 
-
 <script src="/js/sweetalert2.js"></script>
 <script src="/js/jquery.js"></script>
 
 <script src="/js/dataTables.js"></script>
 <script src="/js/dataTables.bootstrap4.js"></script>
 <script src="/js/admin/modal-disposisi.js"></script>
+<script src="/ckeditor5/ckeditor.js"></script>
+<!-- axios -->
+<script src="/axios/axios.js"></script>
+
+
+
 
 <script>
-   $('input[type="file"]').change(function (e) {
-      var fileName = e.target.files[0].name;
-      $('.file-surat').html(fileName);      
-   });
+   let editor_template
+   DecoupledEditor
+      .create(document.querySelector('#editor'), {
+         fontSize: {
+            options: [
+               9, 11, 'default',13,14,17,19,21
+            ],
+            supportAllValues: true
+         },
+      })
+      .then(editor => {
+         editor_template = editor;
+            const toolbarContainer = document.querySelector('#toolbar-container');
+
+            toolbarContainer.appendChild(editor.ui.view.toolbar.element );
+      })
+      .catch(error => {
+            console.error(error);
+      });
+
+
+      // ubah isi surat jika template telah dipilih
+      document.querySelector('#pilih-template').addEventListener('change', function () {
+         const selected_template_id = this.value
+         axios.get('/admin/template/all')
+            .then(function (response) {
+               let templates = response.data.templates
+               templates.forEach(template => {
+                  if(template.id == selected_template_id) return editor_template.setData(template.template)
+               });
+            })
+            .catch(function (error) {
+               // handle error
+               console.log(error);
+            })
+      })
+
+      document.querySelector('#submit').addEventListener('click', () => {
+         // get input form tambah surat
+         const nomor_surat    = document.getElementById('nomor-surat')
+         const tanggal_surat  = document.getElementById('tanggal-surat')
+         const penerima_surat = document.getElementById('penerima-surat')
+         const perihal_surat  = document.getElementById('perihal-surat')
+         const isi_surat      = editor_template.getData()
+
+         let data = {
+            <?= csrf_token() ?>: '<?= csrf_hash() ?>',
+            nomor_surat: nomor_surat.value,
+            tanggal_surat: tanggal_surat.value,
+            penerima_surat: penerima_surat.value,
+            perihal_surat: perihal_surat.value,
+            isi_surat: nomor_surat.value,
+         }
+
+         if(inputValid(data)) insert(data)         
+      });
+
+      // kirim data keserver
+      function insert(data)
+      {
+         axios.post('<?= base_url('admin/surat-keluar') ?>', data)
+            .then(function (response) {
+               Swal.fire({
+                  position: 'center',
+                  icon: 'success',
+                  title: response.data.pesan,
+                  showConfirmButton: false,
+                  timer: 2500
+               })
+               setTimeout(() => {
+                  window.location.href = '/admin/surat-keluar'
+               }, 2600);
+         })
+         .catch(function (error) {
+            console.log(error);
+         });
+      }
+
+      function inputValid(data)
+      {
+         validasi = true
+         for (const [key, value] of Object.entries(data)) {
+            if (!value) {
+               validasi = false
+               return alert('Semua form harus diisi')
+            }
+         }
+         return validasi
+      }
 </script>
 
 

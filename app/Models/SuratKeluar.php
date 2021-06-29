@@ -7,28 +7,13 @@ use CodeIgniter\Model;
 class SuratKeluar extends Model
 {
    protected $table      = 'surat_keluar';
-   protected $primaryKey = 'nomor_surat';
    protected $allowedFields = [
       'nomor_surat', 
-      'nomor_induk', 
-      'tanggal',
+      'perihal', 
+      'isi_surat',
       'penerima',
-      'perihal',
-      'file_surat',
-      'disposisi',
+      'komentar',
+      'status_komentar',
+      'tanggal_surat',
    ];
-
-   // update surat keluar (penerima surat keluar) jika data_user (nama lengkap) diubah
-   public function updateData($penerima_lama, $penerima_baru)
-   {
-      $db      = \Config\Database::connect();
-      $builder = $db->table($this->table);
-
-      $data = [
-         'penerima' => $penerima_baru
-      ];
-     
-      $builder->where('penerima', $penerima_lama);
-      $builder->update($data);
-   }
 }

@@ -61,7 +61,7 @@ $routes->group('admin', ['filter' => 'admin'], function($routes)
 	$routes->get('surat-keluar/insert', 'Admin\SuratKeluar::insert');
 	$routes->delete('surat-keluar', 'Admin\SuratKeluar::destroy');
 	$routes->get('surat-keluar/print', 'Admin\SuratKeluar::printSurat');
-	$routes->get('surat-keluar/(:any)', 'Admin\SuratKeluar::edit');
+	$routes->get('surat-keluar/(:num)', 'Admin\SuratKeluar::edit/$1');
 
 	// penerima surat
 	$routes->get('penerima-surat', 'Admin\PenerimaSurat::index');
@@ -102,7 +102,10 @@ $routes->group('sekertaris', ['filter' => 'sekertaris'], function($routes)
 	$routes->get('surat-keluar/insert', 'Sekertaris\SuratKeluar::insert');
 	$routes->delete('surat-keluar', 'Sekertaris\SuratKeluar::destroy');
 	$routes->get('surat-keluar/print', 'Sekertaris\SuratKeluar::printSurat');
-	$routes->get('surat-keluar/(:any)', 'Sekertaris\SuratKeluar::edit');
+	$routes->get('surat-keluar/(:num)', 'Sekertaris\SuratKeluar::edit/$1');
+	$routes->put('surat-keluar/komentar', 'Sekertaris\SuratKeluar::tambahKomentar');
+	$routes->put('surat-keluar/terima', 'Sekertaris\SuratKeluar::terimaSurat');
+
 });
 
 // ketua
