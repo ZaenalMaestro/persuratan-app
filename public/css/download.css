@@ -1,0 +1,94 @@
+.content{
+   margin-left: auto;
+   margin-right: auto;
+   width: 21.59cm;
+}
+.content .img {
+   width: 120px;
+   z-index: 1;
+   position: absolute;
+   margin-top: 25px;
+   margin-left: 1.5cm;
+}
+
+.content p.header{
+   margin-top: 30px;
+   text-align: center;
+   font-size: 15pt;
+   font-weight: bold;
+   margin-bottom: 0;
+}
+
+.content p.header span.lp2m-text{
+   font-size: 12pt;
+}
+
+.content p.address, .content p.telp, .content p.web{
+   font-weight: normal;
+   font-size: 12px;
+   margin: 0;
+   text-align: center;
+   font-style: italic;
+}
+
+.content p.header,.content p.address, .content p.telp, .content p.web{
+   margin-left: 75px;
+}
+
+/* layout */
+hr.horizontal-line, .content .isi-surat{
+   margin-left: 2.5cm;
+   margin-right: 3cm;
+}
+/* garis horizontal */
+hr.horizontal-line{
+   border: 2px solid black;
+   margin-top: -10px;
+   margin-bottom: -15px;
+}
+
+/* content */
+.content .isi-surat{   
+   word-wrap: break-word;
+   display: block;
+   line-height: 24px;
+}
+
+/* button */
+.btn-print {
+   color: #fff;
+   background-color: #36b9cc;
+   border-color: #36b9cc;
+   border: none;
+   padding: 5px 15px;
+   border-radius: 3px;
+   width: 80%;
+   margin-top: 30px;
+   margin-bottom: 50px;
+}
+/* button */
+.btn-print:hover {
+   background-color: #75c5d1;
+}
+
+.container{
+   text-align: center;
+}
+
+@media print {
+   .noPrint{
+     display:none;
+   }
+
+   .content .img {
+      width: 120px;
+      z-index: 1;
+      position: fixed;
+      margin-top: 0;
+      margin-left: 1.5cm;
+   }
+
+   .content p.header{
+      margin-top: -10px;
+   }
+}

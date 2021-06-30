@@ -13,7 +13,7 @@
       <div class="card-header py-3">
          <h6 class="m-0 font-weight-bold text-primary">Buat Template Baru</h6>
       </div>
-      <div class="card-body mx-5">
+      <div class="card-body ml-5" style="margin-right:2.2cm">
          <!-- ==== form ==== -->         
          <form>
             <!-- nama template -->

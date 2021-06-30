@@ -9,58 +9,58 @@
 
 <div class="row">
    <div class="col-lg-9">
-   <div class="card shadow mb-4">
-      <div class="card-header py-3">
-         <h6 class="m-0 font-weight-bold text-primary">Buat Surat Keluar</h6>
+      <div class="card shadow mb-4">
+         <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Buat Surat Keluar</h6>
+         </div>
+         <div class="card-body ml-5" style="margin-right:2.2cm">
+            <!-- ==== form ==== -->         
+            <form>
+               <!-- nomor surat -->
+               <div class="form-group">
+                  <label for="exampleFormControlInput1">Nomor Surat</label>
+                  <input type="text" id="nomor-surat" class="form-control" placeholder="Nomor surat" value="<?= $nomor_surat ?>" disabled>
+               </div>
+               
+               <!-- tanggal surat -->
+               <div class="form-group">
+                  <label for="exampleFormControlInput1">Tanggal Surat</label>
+                  <input type="date" id="tanggal-surat" class="form-control" placeholder="Tanggal surat" require autofocus>
+               </div>
+
+               <!-- penerima surat -->
+               <div class="form-group">
+                  <label for="exampleFormControlInput1">Penerima Surat</label>
+                  <input type="text" id="penerima-surat" class="form-control" placeholder="Penerima surat" require>
+               </div>
+               <!-- perihal surat -->
+               <div class="form-group">
+                  <label for="exampleFormControlInput1">Perihal Surat</label>
+                  <input type="text" id="perihal-surat" class="form-control" placeholder="Perihal surat" require>
+               </div>
+
+               <div class="form-group">
+                  <label for="exampleFormControlSelect1" require>Pilih Template Surat</label>
+                  <select class="form-control" id="pilih-template">
+                     <option value="">Pilih template surat</option>
+                     <?php foreach($templates as $template) : ?>
+                        <option value="<?= $template['id'] ?>"><?= $template['nama_template'] ?></option>
+                     <?php endforeach ?>
+                  </select>
+               </div>
+
+               <!-- input template -->
+               <div class="form-group template-container">
+                  <label for="exampleFormControlTextarea1">Isi Surat</label>
+                  <div id="toolbar-container"></div>
+                  <!-- This container will become the editable. -->
+                  <div id="editor"></div>
+               </div>
+               <button type="button" id="submit" class="btn btn-md btn-primary btn-block">Simoan Surat Keluar</button>
+            </form>
+            <!-- ==== end form ==== -->
+         </div>
       </div>
-      <div class="card-body mx-5">
-         <!-- ==== form ==== -->         
-         <form>
-            <!-- nomor surat -->
-            <div class="form-group">
-               <label for="exampleFormControlInput1">Nomor Surat</label>
-               <input type="text" id="nomor-surat" class="form-control" placeholder="Nomor surat" value="<?= $nomor_surat ?>" disabled>
-            </div>
-            
-            <!-- tanggal surat -->
-            <div class="form-group">
-               <label for="exampleFormControlInput1">Tanggal Surat</label>
-               <input type="date" id="tanggal-surat" class="form-control" placeholder="Tanggal surat" require autofocus>
-            </div>
-
-            <!-- penerima surat -->
-            <div class="form-group">
-               <label for="exampleFormControlInput1">Penerima Surat</label>
-               <input type="text" id="penerima-surat" class="form-control" placeholder="Penerima surat" require>
-            </div>
-            <!-- perihal surat -->
-            <div class="form-group">
-               <label for="exampleFormControlInput1">Perihal Surat</label>
-               <input type="text" id="perihal-surat" class="form-control" placeholder="Perihal surat" require>
-            </div>
-
-            <div class="form-group">
-               <label for="exampleFormControlSelect1" require>Pilih Template Surat</label>
-               <select class="form-control" id="pilih-template">
-                  <option value="">Pilih template surat</option>
-                  <?php foreach($templates as $template) : ?>
-                     <option value="<?= $template['id'] ?>"><?= $template['nama_template'] ?></option>
-                  <?php endforeach ?>
-               </select>
-            </div>
-
-            <!-- input template -->
-            <div class="form-group template-container">
-               <label for="exampleFormControlTextarea1">Isi Surat</label>
-               <div id="toolbar-container"></div>
-               <!-- This container will become the editable. -->
-               <div id="editor"></div>
-            </div>
-            <button type="button" id="submit" class="btn btn-md btn-primary btn-block">Simoan Surat Keluar</button>
-         </form>
-         <!-- ==== end form ==== -->
-      </div>
-   </div>
    </div>
 </div>
 
@@ -129,7 +129,7 @@
             tanggal_surat: tanggal_surat.value,
             penerima_surat: penerima_surat.value,
             perihal_surat: perihal_surat.value,
-            isi_surat: nomor_surat.value,
+            isi_surat: editor_template.getData(),
          }
 
          if(inputValid(data)) insert(data)         

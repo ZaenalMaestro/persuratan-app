@@ -17,7 +17,7 @@
          <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">Edit Surat Keluar</h6>
          </div>
-         <div class="card-body mx-5">
+         <div class="card-body ml-5" style="margin-right:2.2cm">
             <!-- ==== form ==== -->         
             <form>
                <!-- id surat keluar -->
@@ -94,9 +94,8 @@
       .create(document.querySelector('#editor'), {
          fontSize: {
             options: [
-               9, 11, 'default',13,14,17,19,21
-            ],
-            supportAllValues: true
+               'tiny', 'default', 'big'
+            ]
          },
       })
       .then(editor => {

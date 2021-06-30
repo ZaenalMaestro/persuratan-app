@@ -39,11 +39,18 @@
                            <td width="20%"><?= $surat['nomor_surat'] ?></td>
                            <td><?= $surat['perihal'] ?></td>
                            <td width=""><?= $surat['penerima'] ?></td>
-                           <td width=""><?= $surat['status_komentar'] ?></td>
-                           <td width="13%">
+                           <td width="">
+                              <?php if($surat['komentar'] != '-' && $surat['status_komentar'] == 'revisi') :?>
+                                 dikomentari
+                              <?php else : ?>
+                                 <?= $surat['status_komentar'] ?>
+                              <?php endif; ?>
+                           </td>
+                           <td width="21%">
                               <?php if($surat['status_komentar'] == 'diterima') : ?>
                                  <button type="button" disabled class="btn btn-sm btn-secondary">Edit</button>
                                  <button type="button" disabled class="btn btn-sm btn-secondary">hapus</button>
+                                 <a href="/admin/surat-keluar/download/<?= $surat['id'] ?>" target="_blank" class="btn btn-sm btn-info">Download</a>
                               <?php else : ?>
                                  <a href="/admin/surat-keluar/<?= $surat['id'] ?>" class="btn btn-sm btn-success">Edit</a>
 
@@ -52,6 +59,7 @@
                                     <input type="hidden" name="_method" value="DELETE">
                                     <input type="hidden" name="id" value="<?= $surat['id'] ?>">
                                     <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('yakin hapus surat <?= $surat['penerima'] ?> : <?= $surat['perihal'] ?>?')">hapus</button>
+                                    <button type="button" disabled class="btn btn-sm btn-secondary">Download</button>
                                  </form>
                               <?php endif ?>                              
                            </td>

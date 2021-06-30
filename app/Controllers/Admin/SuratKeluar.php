@@ -162,4 +162,13 @@ class SuratKeluar extends BaseController
 		// Output the generated PDF to Browser
 		$dompdf->stream(date("Y-m-d") . '_print_surat_keluar.pdf');
 	}
+
+	public function download($id)
+	{
+		$data = [
+			'surat_keluar' => $this->suratKeluar->where('id', $id)->first(),
+		];
+
+		return view('download/surat_keluar', $data);
+	}
 }

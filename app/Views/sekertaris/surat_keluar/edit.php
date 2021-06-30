@@ -8,6 +8,9 @@
       .ck-editor__editable {
          min-height: 150px;
       }
+      .isi-surat{
+         width:607.44px;
+      }
    </style>
 <?= $this->endSection() ?>
 
@@ -19,7 +22,7 @@
          <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">Surat Keluar</h6>
          </div>
-         <div class="card-body mx-5">
+         <div class="card-body ml-5" style="margin-right:2.2cm">
             <!-- ==== form ==== -->         
             <form>
                <!-- id surat keluar -->
@@ -50,7 +53,7 @@
                <div class="form-group">
                   <label for="exampleFormControlInput1 mb-0">Isi Surat</label>
                   <hr>
-                  <div class="isi-surat"><?= $surat_keluar['isi_surat'] ?></div>
+                     <div class="isi-surat"><?= $surat_keluar['isi_surat'] ?></div>
                   <hr>
                </div>
 
