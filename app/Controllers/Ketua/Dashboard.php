@@ -21,15 +21,14 @@ class Dashboard extends BaseController
 		// menggabungkan semua surat masuk dan keluar
 		$suratMasuk 	= $this->suratMasuk->findAll();
 		$suratKeluar 	= $this->suratKeluar->findAll();
-		$surat 			= array_merge($suratMasuk, $suratKeluar);
 
 		// filter data surat hari ini
-		$suratHariIni = array_filter($surat, function($data) {
+		$suratHariIni = array_filter($suratMasuk, function($data) {
 			return ($data['tanggal'] == date('Y-m-d') && $data['penerima'] == session('nama') && $data['disposisi'] == 'disposisi');
 		});
 
 		// menampilkan data surat yang telah disposisi
-		$disposisi = array_filter($surat, function($data) {
+		$disposisi = array_filter($suratMasuk, function($data) {
 			return ($data['disposisi'] == 'disposisi');
 		});
 
@@ -53,24 +52,14 @@ class Dashboard extends BaseController
 		$segmant = $this->request->uri->getSegments();
 		$nomor_surat = "$segmant[2]/$segmant[3]/$segmant[4]/$segmant[5]";
 		$suratMasuk = $this->suratMasuk->where('nomor_surat', $nomor_surat)->first();
-		$suratKeluar = $this->suratKeluar->where('nomor_surat', $nomor_surat)->first();
 		
-		if($suratMasuk){
-			$surat  = $suratMasuk;
-			$folder = 'surat_masuk';
-		}elseif($suratKeluar){
-			$surat = $suratKeluar;
-			$folder = 'surat_keluar';
-		}else{
-			return redirect()->back();
-		}
 		$data = [
 			'title' 					=> 'Detail',
 			'role' 					=> 'Ketua',
 			'active_link' 			=> 'dashboard',
 			'validation'			=> $this->validation,
-			'detail_surat'			=> $surat,
-			'folder'					=> $folder
+			'detail_surat'			=> $suratMasuk,
+			'folder'					=> 'surat_masuk'
 		];
 
 		return view('ketua/dashboard/detail', $data);

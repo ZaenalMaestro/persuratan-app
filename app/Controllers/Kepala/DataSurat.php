@@ -20,17 +20,10 @@ class DataSurat extends BaseController
 	{
 		// menggabungkan semua surat masuk dan keluar
 		$suratMasuk 	= $this->suratMasuk->findAll();
-		$suratKeluar 	= $this->suratKeluar->findAll();
-		$surat 			= array_merge($suratMasuk, $suratKeluar);
 
 		// filter data surat hari ini
-		$suratHariIni = array_filter($surat, function($data) {
+		$suratHariIni = array_filter($suratMasuk, function($data) {
 			return ($data['penerima'] == session('nama') && $data['disposisi'] == 'disposisi');
-		});
-
-		// menampilkan data surat yang telah disposisi
-		$disposisi = array_filter($surat, function($data) {
-			return ($data['disposisi'] == 'disposisi');
 		});
 
 		$data = [
@@ -38,10 +31,8 @@ class DataSurat extends BaseController
 			'role' 					=> 'Kepala',
 			'active_link' 			=> 'data_surat',
 			'surat_hari_ini'		=> $suratHariIni,
-			'penerima_surat'		=> $this->dataUser->findAll(),
-			'validation'			=> $this->validation
 		];
 
-		return view('ketua/data_surat/index', $data);
+		return view('kepala/data_surat/index', $data);
 	}
 }

@@ -11,47 +11,38 @@
                <h6 class="m-0 font-weight-bold text-primary">Surat Keluar</h6>
             </div>
             <div class="col-md-2 text-right">
-               <a href="/ketua/surat-keluar/print" target="_blank" class="btn btn-sm btn-success">Print Surat Keluar</a>
+               <a href="/ketua/surat-keluar/print" target="_blank" class="btn btn-sm btn-info">Print Surat Keluar</a>
             </div>
          </div>
       </div>
       <div class="card-body">
          <!-- ==== table ==== -->
-            <div class="table-responsive">
-               <table id="data-surat" class="table table-bordered table-hover" style="width:100%">
+         <table id="data-surat" class="table table-bordered table-hover" style="width:100%">
                   <thead>
                      <tr class="text-center">
-                        <th>No</th>
-                        <th>Nama</th>
-                        <th>Tanggal Surat</th>
+                        <th>No.</th>
+                        <th>Tanggal</th>
+                        <th>Nomor Surat</th>
                         <th>Perihal</th>
-                        <th>Disposisi</th>
+                        <th>Penerima</th>
                         <th>Aksi</th>
                      </tr>
                   </thead>
                   <tbody>
                      <?php $no = 1; foreach($surat_hari_ini as $surat) :?>
                         <tr class="text-center">
-                           <td><?= $no++ ?></td>
-                           <td><?= $surat['penerima'] ?></td>
-                           <td><?= $surat['tanggal'] ?></td>
-                           <td width="30%"><?= $surat['perihal'] ?></td>
-                           <td>
-                              <?php if($surat['disposisi'] == 'disposisi') : ?>
-                                 <span class="text-success font-weight-bolder">&#10003;</span>
-                              <?php else : ?>
-                                 <span class="text-success font-weight-bolder">-</span>
-                              <?php endif ?>
-                           </td>
-                           <td>
-                              <!-- tombol download -->
-                              <a href="/surat/<?= $folder ?>/<?= $surat['file_surat'] ?>" target="_blank" class="btn btn-success btn-sm">Download Surat</a>
+                           <td width="1%"><?= $no++ ?></td>
+                           <td width="13%"><?= $surat['tanggal_surat'] ?></td>
+                           <td width="20%"><?= $surat['nomor_surat'] ?></td>
+                           <td><?= $surat['perihal'] ?></td>
+                           <td width=""><?= $surat['penerima'] ?></td>
+                           <td width="15%"><!-- tombol download -->
+                              <a href="/ketua/surat-keluar/download/<?= $surat['id'] ?>" target="_blank" class="btn btn-success btn-sm">Download Surat</a>
                            </td>
                         </tr>
                      <?php endforeach ?>
                   </tbody>
                </table>
-            </div>
             <!-- ==== end table ==== -->
       </div>
    </div>

@@ -94,7 +94,9 @@
                            <td>
                               <?php if($surat['disposisi'] == 'menunggu') : ?>   
                                  <button type="button" class="btn btn-sm btn-success btn-disposisi" data-toggle="modal" data-target="#disposisiModal" data-nomor-surat="<?= $surat['nomor_surat'] ?>">Disposisi</button>
-                                 <?php endif ?>
+                              <?php else: ?>
+                                 <button type="button" class="btn btn-sm btn-secondary btn-disposisi" disabled>Disposisi</button>
+                              <?php endif ?>
                            </td>
                         </tr>
                      <?php endforeach ?>

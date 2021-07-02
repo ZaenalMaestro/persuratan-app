@@ -122,7 +122,8 @@ $routes->group('ketua', ['filter' => 'ketua'], function($routes)
 
 	// surat keluar
 	$routes->get('surat-keluar', 'Ketua\SuratKeluar::index');
-	$routes->get('surat-keluar/print', 'Ketua\SuratKeluar::printSurat');
+	$routes->get('surat-keluar/print', 'Ketua\SuratKeluar::printSurat');	
+	$routes->get('surat-keluar/download/(:num)', 'Ketua\SuratKeluar::download/$1');
 });
 
 // kepala

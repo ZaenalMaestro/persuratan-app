@@ -15,14 +15,11 @@ class SuratKeluar extends BaseController
 	// menampilkan halaman dashborad - data penelitian
 	public function index()
 	{
-		$surat = $this->suratKeluar->findAll();
-		// filter data surat sekertaris
-
 		$data = [
 			'title' 					=> 'Surat Keluar',
 			'role' 					=> 'Ketua',
 			'active_link' 			=> 'surat_keluar',
-			'surat_hari_ini'		=> $surat,
+			'surat_hari_ini'		=> $this->suratKeluar->where('status_komentar', 'diterima')->find(),
 			'folder'					=> 'surat_keluar'
 		];
 
@@ -33,21 +30,18 @@ class SuratKeluar extends BaseController
 	public function printSurat()
 	{
 		$data = [
-			'surat'		=>  $this->suratKeluar->findAll(),
+			'surat'		=>  $this->suratKeluar->where('status_komentar', 'diterima')->find(),
 			'judul'	=> 'Laporan Surat Keluar'
 		];
-		$html =  view('ketua/surat_keluar/print_surat_keluar', $data);
-		
-		// instantiate and use the dompdf class
-		$dompdf = new Dompdf();
-		$dompdf->loadHtml($html);
-		// (Optional) Setup the paper size and orientation
-		$dompdf->setPaper('A4', 'portair');
+		return view('download/all_surat_keluar', $data);
+	}
 
-		// Render the HTML as PDF
-		$dompdf->render();
+	public function download($id)
+	{
+		$data = [
+			'surat_keluar' => $this->suratKeluar->where('id', $id)->first(),
+		];
 
-		// Output the generated PDF to Browser
-		$dompdf->stream(date("Y-m-d") . '_print_surat_keluar.pdf');
+		return view('download/surat_keluar', $data);
 	}
 }

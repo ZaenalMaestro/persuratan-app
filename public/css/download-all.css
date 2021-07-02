@@ -40,13 +40,6 @@ hr.horizontal-line, .content .isi-surat{
    margin-left: 2.5cm;
    margin-right: 3cm;
 }
-
-/* layout with-table*/
-hr.horizontal-line-table, .content .isi-surat-table{
-   margin-left: 1.5cm;
-   margin-right: 1.5cm;
-}
-
 /* garis horizontal */
 hr.horizontal-line{
    border: 2px solid black;
@@ -138,7 +131,7 @@ hr{
       width: 120px;
       z-index: 1;
       position: fixed;
-      margin-top: 2px;
+      margin-top: 0;
       margin-left: 1.5cm;
    }
 

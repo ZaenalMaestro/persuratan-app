@@ -144,23 +144,10 @@ class SuratKeluar extends BaseController
 	public function printSurat()
 	{
 		$data = [
-			'surat'		=>  $this->suratKeluar->findAll(),
-			'judul'	=> 'Laporan Surat Keluar'
+			'surat'		=>  $this->suratKeluar->where('status_komentar', 'diterima')->find(),
 		];
-		// return view('admin/surat_masuk/print_surat_masuk', $data);
-		$html =  view('admin/surat_keluar/print_surat_keluar', $data);
-		
-		// instantiate and use the dompdf class
-		$dompdf = new Dompdf();
-		$dompdf->loadHtml($html);
-		// (Optional) Setup the paper size and orientation
-		$dompdf->setPaper('A4', 'portair');
 
-		// Render the HTML as PDF
-		$dompdf->render();
-
-		// Output the generated PDF to Browser
-		$dompdf->stream(date("Y-m-d") . '_print_surat_keluar.pdf');
+		return  view('download/all_surat_keluar', $data);
 	}
 
 	public function download($id)
