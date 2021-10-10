@@ -38,7 +38,7 @@
                <select class="form-control <?= ($validation->hasError('penerima') ? 'is-invalid' : '') ?>" id="penerima" name="penerima">
                   <option value="">Pilih Penerima</option>
                   <?php foreach($penerima_surat as $penerima) : ?>
-                     <?php if(strtolower($penerima['nama_lengkap']) !== 'operator' ) : ?>
+                     <?php if(strtolower($penerima['nama_lengkap']) !== 'operator' && strtolower($penerima['nama_lengkap']) != 'sekertaris') : ?>
                         <option value="<?= $penerima['nama_lengkap'] ?>" <?= ($surat_masuk['penerima'] == $penerima['nama_lengkap']) ? 'selected' : '' ?>><?= $penerima['nama_lengkap'] ?></option>
                      <?php endif; ?>
                   <?php endforeach ?>

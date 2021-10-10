@@ -24,7 +24,7 @@ class Dashboard extends BaseController
 
 		// filter data surat hari ini
 		$suratHariIni = array_filter($suratMasuk, function($data) {
-			return ($data['tanggal'] == date('Y-m-d') && $data['penerima'] == session('nama') && $data['disposisi'] == 'disposisi');
+			return ($data['tanggal'] == date('Y-m-d'));
 		});
 
 		// menampilkan data surat yang telah disposisi

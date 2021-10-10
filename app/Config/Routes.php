@@ -34,9 +34,12 @@ $routes->setAutoRoute(false);
 // route since we don't have to scan directories.
 
 // login
-$routes->get('/', 'Login::index', ['filter' => 'login']);
+$routes->get('/login', 'Login::index', ['filter' => 'login']);
 $routes->post('/login', 'Login::signIn', ['filter' => 'login']);
 $routes->get('/logout', 'Login::logOut');
+
+// portal LP2M
+$routes->get('/', 'Portal\PortalLP2M::index');
 
 // admin
 $routes->group('admin', ['filter' => 'admin'], function($routes)
@@ -135,8 +138,6 @@ $routes->group('kepala', ['filter' => 'kepala'], function($routes)
 	$routes->get('detail/(:any)', 'Kepala\Dashboard::show');
 });
 
-// portal LP2M
-$routes->get('/portal', 'Portal\PortalLP2M::index');
 
 
 

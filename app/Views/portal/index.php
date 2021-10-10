@@ -61,7 +61,7 @@
           <li class="active"><a href="index.html#">Home</a></li>
           <li><a href="#profile-lp2m">Profil</a></li>
           <li><a href="#visi-misi">Visi dan Misi</a></li>
-          <li><a href="#struktur-organisasi">Sktruktur Organisasi</a></li>
+          <li><a href="#struktur-organisasi">Struktur Organisasi</a></li>
           <li><a href="#tentang-sistem">Tentang Sistem</a></li>
 
         </ul>
@@ -77,7 +77,7 @@
           <div class="mt-4 welcome">
             <h2 class="text-white mb-1 mt-3">Selamat Datang di</h2>
             <h1 class="text-white font-weight-7">LP2M Universitas Negeri Makassar</h1>
-            <a href="#profile-lp2m" class="btn-get-started scrollto">Selengkapnya</a>
+            <a href="/login" class="btn-get-started scrollto">Login</a>
           </div>
         </div>
       </div>

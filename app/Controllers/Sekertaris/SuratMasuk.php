@@ -18,12 +18,15 @@ class SuratMasuk extends BaseController
 	public function index()
 	{
 		$surat = $this->suratMasuk->findAll();
+		$suratMasuk = array_filter($surat, function($data) {
+			return $data['penerima'] !== session('nama');
+		});
 		// filter data surat sekertaris
 		$data = [
 			'title' 					=> 'Surat Masuk',
 			'role' 					=> 'Sekertaris',
 			'active_link' 			=> 'surat_masuk',
-			'surat_hari_ini'		=> $surat,
+			'surat_hari_ini'		=> $suratMasuk,
 			'penerima_surat'		=> $this->dataUser->findAll(),
 			'validation'			=> $this->validation
 		];

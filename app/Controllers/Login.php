@@ -55,6 +55,6 @@ class Login extends BaseController
 	public function logOut()
 	{
 		session()->destroy();
-		return redirect()->to('/');
+		return redirect()->to('/login');
 	}
 }
