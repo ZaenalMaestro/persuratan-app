@@ -158,4 +158,13 @@ class SuratKeluar extends BaseController
 
 		return view('download/surat_keluar', $data);
 	}
+
+	public function lihat($id)
+	{
+		$data = [
+			'surat_keluar' => $this->suratKeluar->where('id', $id)->first(),
+		];
+
+		return view('download/lihat', $data);
+	}
 }

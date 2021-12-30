@@ -71,6 +71,13 @@
    <?php endif ?>
 
    <!-- Nav Item - keluar -->
+   <li class="nav-item <?= ($active_link == 'password') ? 'active' : '' ?>">
+      <a class="nav-link" href="/<?= strtolower($role) ?>/password">
+         <i class="fas fa-sign-out-alt"></i>
+         <span>Ganti Password</span></a>
+   </li>
+
+   <!-- Nav Item - keluar -->
    <li class="nav-item">
       <a class="nav-link" href="/logout">
          <i class="fas fa-sign-out-alt"></i>

@@ -46,12 +46,14 @@
                                  <?= $surat['status_komentar'] ?>
                               <?php endif; ?>
                            </td>
-                           <td width="21%">
+                           <td width="27%">
                               <?php if($surat['status_komentar'] == 'diterima') : ?>
+                                 <a href="/admin/surat-keluar/lihat/<?= $surat['id'] ?>" class="btn btn-sm btn-primary">Lihat</a>
                                  <button type="button" disabled class="btn btn-sm btn-secondary">Edit</button>
                                  <button type="button" disabled class="btn btn-sm btn-secondary">hapus</button>
                                  <a href="/admin/surat-keluar/download/<?= $surat['id'] ?>" target="_blank" class="btn btn-sm btn-info">Download</a>
                               <?php else : ?>
+                                 <a href="/admin/surat-keluar/lihat/<?= $surat['id'] ?>" class="btn btn-sm btn-primary">Lihat</a>
                                  <a href="/admin/surat-keluar/<?= $surat['id'] ?>" class="btn btn-sm btn-success">Edit</a>
 
                                  <form action="/admin/surat-keluar" method="POST" class="d-inline">

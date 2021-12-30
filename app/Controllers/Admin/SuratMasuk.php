@@ -82,7 +82,7 @@ class SuratMasuk extends BaseController
 		$this->suratMasuk->insert($data);
 
 		// upload surat
-		$fileSurat->move(ROOTPATH . 'public/surat/surat_masuk', $nama_surat);
+		$fileSurat->move(ROOTPATH . '../public_html/surat/surat_masuk', $nama_surat);
 
 		session()->setFlashData('pesan', 'Surat masuk berhasil dibuat');
 		return redirect()->to('/admin/surat-masuk');
@@ -102,7 +102,26 @@ class SuratMasuk extends BaseController
 			'penerima_surat'		=> $this->dataUser->findAll()
 		];
 
+		
+
 		return view('admin/surat_masuk/edit', $data);
+	}
+
+	public function lihat()
+	{
+		$segmant = $this->request->uri->getSegments();
+		$nomor_surat = "$segmant[3]/$segmant[4]/$segmant[5]/$segmant[6]";
+		$surat = $this->suratMasuk->where('nomor_surat', $nomor_surat)->first();
+		$data = [
+			'title' 					=> 'Lihat Surat Masuk',
+			'role' 					=> 'Admin',
+			'active_link' 			=> 'surat_masuk',
+			'validation'			=> $this->validation,
+			'surat_masuk'			=> $surat,
+			'penerima_surat'		=> $this->dataUser->findAll()
+		];
+
+		return view('pdf_view', $data);
 	}
 
 	// update surat masuk
@@ -146,7 +165,7 @@ class SuratMasuk extends BaseController
 		if($fileSurat->getSize() > 0) {
 			$data['file_surat'] = $nama_surat;
 			// upload surat
-			$fileSurat->move(ROOTPATH . 'public/surat/surat_masuk', $nama_surat);
+			$fileSurat->move(ROOTPATH . '../public_html/surat/surat_masuk', $nama_surat);
 		}
 
 		// insert surat masuk

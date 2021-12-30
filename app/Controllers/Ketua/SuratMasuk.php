@@ -10,6 +10,9 @@ class SuratMasuk extends BaseController
 		helper('text');
 		date_default_timezone_set('Asia/Hong_Kong');
 		$this->suratMasuk = new \App\Models\SuratMasuk();
+		
+		$this->dataUser = new \App\Models\DataUser();
+		$this->validation =  \Config\Services::validation();
 	}
 
 	// menampilkan halaman dashborad - data penelitian
@@ -26,6 +29,22 @@ class SuratMasuk extends BaseController
 		];
 
 		return view('ketua/surat_masuk/index', $data);
+	}
+
+	public function lihat()
+	{
+		$segmant = $this->request->uri->getSegments();
+		$nomor_surat = "$segmant[3]/$segmant[4]/$segmant[5]/$segmant[6]";
+		$surat = $this->suratMasuk->where('nomor_surat', $nomor_surat)->first();
+		$data = [
+			'title' 					=> 'Lihat Surat',
+			'role' 					=> 'Admin',
+			'active_link' 			=> 'surat_masuk',
+			'surat_masuk'			=> $surat,
+			'penerima_surat'		=> $this->dataUser->findAll()
+		];
+
+		return view('pdf_view', $data);
 	}
 
 	// print surat masuk

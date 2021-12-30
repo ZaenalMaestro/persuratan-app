@@ -10,7 +10,6 @@ class PenerimaSurat extends BaseController
 		helper('text');
 		$this->dataUser = new \App\Models\DataUser();
 		$this->suratMasuk = new \App\Models\SuratMasuk();
-		$this->suratKeluar = new \App\Models\SuratKeluar();
 		$this->validation =  \Config\Services::validation();
 	}
 
@@ -88,7 +87,6 @@ class PenerimaSurat extends BaseController
 			$penerima_lama = $request['nama-penerima-lama'];
 			$penerima_baru = $request['nama-penerima'];
 			$this->suratMasuk->updateData($penerima_lama, $penerima_baru);
-			$this->suratKeluar->updateData($penerima_lama, $penerima_baru);
 		}
 
 		// validasi input
@@ -123,7 +121,6 @@ class PenerimaSurat extends BaseController
 			$data['password'] = password_hash($request['password'], PASSWORD_BCRYPT);
 		}
 
-
 		$this->dataUser->update($request['nomor-induk-lama'], $data);
 
 		session()->setFlashData('pesan', 'Penerima surat berhasil diubah');
@@ -136,7 +133,6 @@ class PenerimaSurat extends BaseController
 		$penerima = $this->request->getPost('penerima');
 		$nomor_induk = $this->request->getPost('nomor-induk');
 		$this->suratMasuk->where('penerima', $penerima)->delete();
-		$this->suratKeluar->where('penerima', $penerima)->delete();
 		$this->dataUser->delete($nomor_induk);
 
 		session()->setFlashData('pesan', 'Penerima surat berhasil dihapus!');

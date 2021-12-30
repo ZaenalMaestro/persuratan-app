@@ -58,7 +58,7 @@
 
       <nav class="nav-menu d-none d-lg-block ml-auto">
         <ul>
-          <li class="active"><a href="index.html#">Home</a></li>
+          <li class="active"><a href="#">Home</a></li>
           <li><a href="#profile-lp2m">Profil</a></li>
           <li><a href="#visi-misi">Visi dan Misi</a></li>
           <li><a href="#struktur-organisasi">Struktur Organisasi</a></li>

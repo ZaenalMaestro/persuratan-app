@@ -36,7 +36,8 @@
                            <td width="20%"><?= $surat['nomor_surat'] ?></td>
                            <td><?= $surat['perihal'] ?></td>
                            <td width=""><?= $surat['penerima'] ?></td>
-                           <td width="15%"><!-- tombol download -->
+                           <td width="20%"><!-- tombol download -->
+                              <a href="/ketua/surat-keluar/lihat/<?= $surat['id'] ?>" class="btn btn-sm btn-primary">Lihat</a>
                               <a href="/ketua/surat-keluar/download/<?= $surat['id'] ?>" target="_blank" class="btn btn-success btn-sm">Download Surat</a>
                            </td>
                         </tr>

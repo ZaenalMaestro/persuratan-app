@@ -84,7 +84,12 @@
                            <td><?= $surat['tanggal'] ?></td>
                            <td width="30%"><?= $surat['perihal'] ?></td>
                            <td>
-                           <a href="/ketua/detail/<?= $surat['nomor_surat'] ?>" class="btn btn-sm btn-success">detail</a>
+                              <a href="/ketua/detail/<?= $surat['nomor_surat'] ?>" class="btn btn-sm btn-success">detail</a>
+                              <?php if($surat['disposisi'] == 'menunggu') : ?>   
+                                 <button type="button" class="btn btn-sm btn-success btn-disposisi" data-toggle="modal" data-target="#disposisiModal" data-nomor-surat="<?= $surat['nomor_surat'] ?>">Disposisi</button>
+                              <?php else: ?>
+                                 <button type="button" class="btn btn-sm btn-secondary btn-disposisi" disabled>Disposisi</button>
+                              <?php endif ?>
                            </td>
                         </tr>
                      <?php endforeach ?>
@@ -97,12 +102,51 @@
    </div>
 </div>
 
+<!-- Modal -->
+<div class="modal fade" id="disposisiModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Form Disposisi</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+         <!-- === form ==== -->
+         <form action="/ketua" method="post">
+            <?= csrf_field() ?>
+            <input type="hidden" name="nomor-surat" id="nomor-surat">
+            <div class="form-group">
+               <label for="exampleFormControlSelect1">Nama Penerima</label>
+               <select class="form-control <?= ($validation->hasError('penerima') ? 'is-invalid' : '') ?>" id="penerima" name="penerima">
+                  <option value="">Pilih Penerima</option>
+                  <?php foreach($penerima_surat as $penerima) : ?>
+                     <?php if(strtolower($penerima['nama_lengkap']) !== 'operator' ) : ?>
+                        <option value="<?= $penerima['nama_lengkap'] ?>"><?= $penerima['nama_lengkap'] ?></option>
+                     <?php endif; ?>
+                  <?php endforeach ?>
+               </select>
+               <div class="invalid-feedback">
+                     <?= $validation->getError('penerima') ?>
+               </div>
+            </div>
+            <button type="submit" class="btn btn-success btn-block">Disposisi</button>
+         </form>
+
+      </div>
+    </div>
+  </div>
+</div>
+
 
 <script src="/js/sweetalert2.js"></script>
 <script src="/js/jquery.js"></script>
 
 <script src="/js/dataTables.js"></script>
 <script src="/js/dataTables.bootstrap4.js"></script>
+<script src="/js/admin/modal-disposisi.js"></script>
 
 <script>
    $(document).ready(function () {

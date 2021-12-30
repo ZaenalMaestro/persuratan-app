@@ -46,6 +46,7 @@
                            </td>
                            <td>
                               <!-- === edit ===  -->
+                              <a href="/admin/surat-masuk/lihat/<?= $surat['nomor_surat'] ?>" class="btn btn-sm btn-success">Lihat</a>
                               <a href="/admin/surat-masuk/<?= $surat['nomor_surat'] ?>" class="btn btn-sm btn-success">Edit</a>
                               <!-- === hapus === -->
                               <form action="/admin/surat-masuk" method="POST" class="d-inline">
