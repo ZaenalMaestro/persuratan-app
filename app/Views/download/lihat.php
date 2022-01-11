@@ -5,30 +5,10 @@
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>Lihat Surat Keluar</title>
+   <link rel="stylesheet" href="/ckeditor5/editor-style.css">
+   <link rel="stylesheet" href="/ckeditor5/style.css">
    <link rel="stylesheet" href="/css/download.css">
-   <style>
-      
-      .content{
-         box-shadow: 1px 1px 1px 2px rgba(0, 0, 0, 0.3);
-         border-radius: 5px;
-         padding-top: 50px;
-         padding-bottom: 30px;
-         margin-bottom: 50px
-      }
-
-      
-
-      .judul, .back{
-         font-family: arial;
-         text-align: center;
-      }
-
-      a.back {
-         display: block;
-         width: 100px;
-         margin: 0 auto;
-         text-decoration: none
-      }
+   <link rel="stylesheet" href="/css/preview.css">
    </style>
 </head>
 <body>
@@ -51,5 +31,7 @@
          <?= $surat_keluar['isi_surat'] ?>
       </div>
    </div>
+   <script src="/ckeditor5/ckeditor.js"></script>
+   <script src="/assets/ckfinder/ckfinder.js"></script>
 </body>
 </html>

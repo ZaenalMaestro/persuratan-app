@@ -61,6 +61,7 @@ $routes->group('admin', ['filter' => 'admin'], function($routes)
 	// surat keluar
 	$routes->get('surat-keluar', 'Admin\SuratKeluar::index');
 	$routes->post('surat-keluar', 'Admin\SuratKeluar::create');
+	$routes->post('surat-keluar/upload', 'Admin\SuratKeluar::upload');
 	$routes->put('surat-keluar', 'Admin\SuratKeluar::update');
 	$routes->get('surat-keluar/insert', 'Admin\SuratKeluar::insert');
 	$routes->delete('surat-keluar', 'Admin\SuratKeluar::destroy');

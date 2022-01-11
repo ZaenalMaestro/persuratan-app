@@ -25,7 +25,10 @@
                <!-- nomor surat -->
                <div class="form-group">
                   <label for="exampleFormControlInput1">Nomor Surat</label>
-                  <input type="text" id="nomor-surat" class="form-control" placeholder="Nomor surat" value="<?= $surat_keluar['nomor_surat'] ?>" disabled>
+                  <input type="text" id="nomor-surat" class="form-control" placeholder="Nomor surat" value="<?= $surat_keluar['nomor_surat'] ?>">
+                  <div class="invalid-feedback">
+                     format nomor surat tidak valid
+                  </div>
                </div>
                
                <!-- tanggal surat -->
@@ -90,8 +93,7 @@
 
 <script>
    let editor_template
-   DecoupledEditor
-      .create(document.querySelector('#editor'), {
+   DecoupledEditor.create(document.querySelector('#editor'), {
          fontSize: {
             options: [
                'tiny', 'default', 'big'
@@ -126,8 +128,8 @@
             })
       })
 
+      // update data surat keluar
       document.querySelector('#submit').addEventListener('click', () => {
-         // get input form tambah surat
          const id_surat_keluar = document.getElementById('id-surat-keluar')
          const nomor_surat     = document.getElementById('nomor-surat')
          const tanggal_surat   = document.getElementById('tanggal-surat')
@@ -149,6 +151,17 @@
          // jika input valid kirim update data keserve
          if(inputValid(data)) update(data)
       });
+
+      // validasi nomor surat
+      document.getElementById('nomor-surat').addEventListener('keyup', function() {
+         const tombol_submit =document.querySelector('#submit')
+         if (!cekFormatNomorSurat(this.value)) {
+            this.classList.add('is-invalid')
+            return tombol_submit.style.display = 'none'
+         }
+         this.classList.remove('is-invalid')
+         tombol_submit.style.display = 'block'
+      })
 
       // kirim perubahan data keserver
       function update(data)
@@ -181,6 +194,13 @@
             }
          }
          return validasi
+      }
+
+      // cek format nomor surat
+      function cekFormatNomorSurat(get_nomor_surat) {
+         const seksion_nomor_surat = get_nomor_surat.split('/')
+         if(seksion_nomor_surat.length < 4) return false;
+         else return true;
       }
 </script>
 

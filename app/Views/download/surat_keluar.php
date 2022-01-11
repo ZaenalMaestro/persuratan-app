@@ -6,6 +6,28 @@
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>Download Surat Keluar</title>
    <link rel="stylesheet" href="/css/download.css">
+   <style>
+      figure.image{
+         margin-inline: 0;
+         margin-bottom: -120px;
+      }
+      .image {
+         display: flex;
+         justify-content: center;
+         padding: 0;
+      }
+
+      .image-style-align-right {
+         width: 100%;
+         display: flex;
+         justify-content: end;
+      }
+      .image-style-align-left {
+         width: 100%;
+         display: flex;
+         justify-content: start;
+      }
+   </style>
 </head>
 <body>   
    <div class="content">

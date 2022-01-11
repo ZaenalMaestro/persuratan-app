@@ -44,6 +44,7 @@
 <script src="/js/dataTables.bootstrap4.js"></script>
 <script src="/js/admin/modal-disposisi.js"></script>
 <script src="/ckeditor5/ckeditor.js"></script>
+<script src="/assets/ckfinder/ckfinder.js"></script>
 <!-- axios -->
 <script src="/axios/axios.js"></script>
 
@@ -56,7 +57,28 @@
                9, 11, 'default',13,14,17,19,21
             ],
             supportAllValues: true
-         },
+         }, 
+         ckfinder: {
+			   uploadUrl: '/assets/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files&responseType=json',
+		   },
+         toolbar: {
+            items: [
+               'ckfinder', 'imageUpload', '|',
+               'heading', '|',
+               'fontfamily', 'fontsize', '|',
+               'alignment', '|',
+               'fontColor', 'fontBackgroundColor', '|',
+               'bold', 'italic', 'strikethrough', 'underline', 'subscript', 'superscript', '|',
+               'link', '|',
+               'outdent', 'indent', '|',
+               'bulletedList', 'numberedList', 'todoList', '|',
+               'code', 'codeBlock', '|',
+               'insertTable', '|',
+               'blockQuote', '|',
+               'undo', 'redo'
+            ],
+            shouldNotGroupWhenFull: true
+         }
       })
       .then(editor => {
          editor_template = editor;
