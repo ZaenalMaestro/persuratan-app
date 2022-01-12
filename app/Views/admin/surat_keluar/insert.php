@@ -3,6 +3,7 @@
 <?= $this->section('css') ?>
    <link rel="stylesheet" href="/ckeditor5/editor-style.css">
    <link rel="stylesheet" href="/ckeditor5/style.css">
+   <link rel="stylesheet" href="/css/mystyle.css">
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
@@ -30,9 +31,22 @@
 
                <!-- penerima surat -->
                <div class="form-group">
-                  <label for="exampleFormControlInput1">Penerima Surat</label>
-                  <input type="text" id="penerima-surat" class="form-control" placeholder="Penerima surat" require>
+                  <label for="penerima">Penerima Surat</label>
+                  <select class="form-control <?= ($validation->hasError('penerima') ? 'is-invalid' : '') ?>" id="penerima" name="penerima">
+                     <option value="">-- Pilih Penerima Surat --</option>
+                     <?php foreach($penerima_surat as $penerima) : ?>
+                        <?php if(strtolower($penerima['nama_lengkap']) !== 'operator' ) : ?>
+                           <option value="<?= $penerima['nama_lengkap'] ?>"><?= $penerima['nama_lengkap'] ?></option>
+                        <?php endif; ?>
+                     <?php endforeach ?>
+                  </select>
+                  <!-- input penerima surat manual -->
+                  <input type="text" id="penerima-manual" class="form-control" placeholder="masukkan penerima surat" require>
+                  <div class="invalid-feedback">
+                        <?= $validation->getError('penerima') ?>
+                  </div>
                </div>
+
                <!-- perihal surat -->
                <div class="form-group">
                   <label for="exampleFormControlInput1">Perihal Surat</label>
@@ -42,7 +56,7 @@
                <div class="form-group">
                   <label for="exampleFormControlSelect1" require>Pilih Template Surat</label>
                   <select class="form-control" id="pilih-template">
-                     <option value="">Pilih template surat</option>
+                     <option value="">-- Pilih template surat --</option>
                      <?php foreach($templates as $template) : ?>
                         <option value="<?= $template['id'] ?>"><?= $template['nama_template'] ?></option>
                      <?php endforeach ?>
@@ -56,7 +70,7 @@
                   <!-- This container will become the editable. -->
                   <div id="editor"></div>
                </div>
-               <button type="button" id="submit" class="btn btn-md btn-primary btn-block">Simoan Surat Keluar</button>
+               <button type="button" id="submit" class="btn btn-md btn-primary btn-block">Simpan Surat Keluar</button>
             </form>
             <!-- ==== end form ==== -->
          </div>
@@ -119,20 +133,26 @@
          // get input form tambah surat
          const nomor_surat    = document.getElementById('nomor-surat')
          const tanggal_surat  = document.getElementById('tanggal-surat')
-         const penerima_surat = document.getElementById('penerima-surat')
+
+         const select_penerima_surat = document.getElementById('penerima')
+         let penerima_surat = select_penerima_surat.value
+         const penerima_manual = document.getElementById('penerima-manual')
+         if(!select_penerima_surat.value) penerima_surat = penerima_manual.value
+         
          const perihal_surat  = document.getElementById('perihal-surat')
          const isi_surat      = editor_template.getData()
+         
 
          let data = {
             <?= csrf_token() ?>: '<?= csrf_hash() ?>',
             nomor_surat: nomor_surat.value,
             tanggal_surat: tanggal_surat.value,
-            penerima_surat: penerima_surat.value,
+            penerima_surat: penerima_surat,
             perihal_surat: perihal_surat.value,
             isi_surat: editor_template.getData(),
          }
-
-         if(inputValid(data)) insert(data)         
+         
+         if(inputValid(data)) insert(data)
       });
 
       // kirim data keserver
@@ -167,6 +187,15 @@
          }
          return validasi
       }
+
+      // menampilkan input manual jika dropdown penerima surat tidak diisi
+      document.getElementById('penerima').addEventListener('change', function() {
+         const penerima_manual = document.getElementById('penerima-manual')
+
+         if (!this.value) return penerima_manual.style.display = 'block'
+         penerima_manual.style.display = 'none'
+         penerima_manual.value = ''
+      })
 </script>
 
 

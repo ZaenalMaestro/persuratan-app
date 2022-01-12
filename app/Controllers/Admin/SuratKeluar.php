@@ -11,6 +11,7 @@ class SuratKeluar extends BaseController
 		date_default_timezone_set('Asia/Hong_Kong');
 		$this->suratKeluar = new \App\Models\SuratKeluar();
 		$this->templateModel = new \App\Models\TemplateSurat();
+		$this->dataUser = new \App\Models\DataUser();
 		$this->validation =  \Config\Services::validation();
 	}
 
@@ -51,6 +52,7 @@ class SuratKeluar extends BaseController
 			'active_link' 	=> 'surat_keluar',
 			'validation'	=> $this->validation,
 			'templates'		=> $this->templateModel->findAll(),
+			'penerima_surat'		=> $this->dataUser->findAll(),
 			'nomor_surat'	=> $format_nomor_surat,
 		];
 
@@ -97,7 +99,8 @@ class SuratKeluar extends BaseController
 			'role' 					=> 'Admin',
 			'active_link' 			=> 'surat_keluar',
 			'validation'			=> $this->validation,
-			'templates'				=> $this->templateModel->findAll(),
+			'templates'				=> $this->templateModel->findAll(),			
+			'penerima_surat'				=> $this->dataUser->findAll(),
 			'surat_keluar'			=> $surat,
 		];
 
