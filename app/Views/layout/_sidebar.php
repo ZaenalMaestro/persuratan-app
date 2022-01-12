@@ -73,7 +73,7 @@
    <!-- Nav Item - keluar -->
    <li class="nav-item <?= ($active_link == 'password') ? 'active' : '' ?>">
       <a class="nav-link" href="/<?= strtolower($role) ?>/password">
-         <i class="fas fa-sign-out-alt"></i>
+         <i class="fas fa-fw fa-cog"></i>
          <span>Ganti Password</span></a>
    </li>
 
