@@ -31,16 +31,13 @@ class SuratMasuk extends BaseController
 		return view('ketua/surat_masuk/index', $data);
 	}
 
-	public function lihat()
+	public function lihat($id)
 	{
-		$segmant = $this->request->uri->getSegments();
-		$nomor_surat = "$segmant[3]/$segmant[4]/$segmant[5]/$segmant[6]";
-		$surat = $this->suratMasuk->where('nomor_surat', $nomor_surat)->first();
 		$data = [
 			'title' 					=> 'Lihat Surat',
-			'role' 					=> 'Admin',
+			'role' 					=> 'Ketua',
 			'active_link' 			=> 'surat_masuk',
-			'surat_masuk'			=> $surat,
+			'surat_masuk'			=> $this->suratMasuk->where('id', $id)->first(),
 			'penerima_surat'		=> $this->dataUser->findAll()
 		];
 

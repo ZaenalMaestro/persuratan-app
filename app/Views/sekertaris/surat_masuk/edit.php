@@ -13,6 +13,7 @@
          <form action="/sekertaris/surat-masuk" method="POST" enctype="multipart/form-data">
             <?= csrf_field() ?>
             <input type="hidden" name="_method" value="PUT">
+            <input type="hidden" name="id" value="<?= $surat_masuk['id'] ?>">
             <input type="hidden" name="nomor-surat-lama" value="<?= $surat_masuk['nomor_surat'] ?>">
             <!-- ==== nomor surat ==== -->
             <div class="form-group">

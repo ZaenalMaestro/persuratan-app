@@ -48,18 +48,14 @@ class Dashboard extends BaseController
 		return view('kepala/dashboard/index', $data);
 	}
 
-	public function show()
+	public function show($id)
 	{
-		$segmant = $this->request->uri->getSegments();
-		$nomor_surat = "$segmant[2]/$segmant[3]/$segmant[4]/$segmant[5]";
-		$suratMasuk = $this->suratMasuk->where('nomor_surat', $nomor_surat)->first();
-
 		$data = [
 			'title' 					=> 'Detail',
 			'role' 					=> 'Kepala',
 			'active_link' 			=> 'dashboard',
 			'validation'			=> $this->validation,
-			'detail_surat'			=> $suratMasuk,
+			'detail_surat'			=> $suratMasuk = $this->suratMasuk->where('id', $id)->first(),
 			'folder'					=> 'surat_masuk'
 		];
 

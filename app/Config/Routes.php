@@ -55,8 +55,8 @@ $routes->group('admin', ['filter' => 'admin'], function($routes)
 	$routes->get('surat-masuk/insert', 'Admin\SuratMasuk::insert');
 	$routes->delete('surat-masuk', 'Admin\SuratMasuk::destroy');
 	$routes->get('surat-masuk/print', 'Admin\SuratMasuk::printSurat');
-	$routes->get('surat-masuk/lihat/(:any)', 'Admin\SuratMasuk::lihat');
-	$routes->get('surat-masuk/(:any)', 'Admin\SuratMasuk::edit');
+	$routes->get('surat-masuk/lihat/(:num)', 'Admin\SuratMasuk::lihat/$1');
+	$routes->get('surat-masuk/(:num)', 'Admin\SuratMasuk::edit/$1');
 
 	// surat keluar
 	$routes->get('surat-keluar', 'Admin\SuratKeluar::index');
@@ -101,11 +101,11 @@ $routes->group('sekertaris', ['filter' => 'sekertaris'], function($routes)
 	$routes->get('surat-masuk', 'Sekertaris\SuratMasuk::index');
 	$routes->post('surat-masuk', 'Sekertaris\SuratMasuk::create');
 	$routes->put('surat-masuk', 'Sekertaris\SuratMasuk::update');
-	$routes->get('surat-masuk/lihat/(:any)', 'Sekertaris\SuratMasuk::lihat');
+	$routes->get('surat-masuk/lihat/(:num)', 'Sekertaris\SuratMasuk::lihat/$1');
 	$routes->get('surat-masuk/insert', 'Sekertaris\SuratMasuk::insert');
 	$routes->delete('surat-masuk', 'Sekertaris\SuratMasuk::destroy');
 	$routes->get('surat-masuk/print', 'Sekertaris\SuratMasuk::printSurat');
-	$routes->get('surat-masuk/(:any)', 'Sekertaris\SuratMasuk::edit');
+	$routes->get('surat-masuk/(:num)', 'Sekertaris\SuratMasuk::edit/$1');
 
 	// surat keluar
 	$routes->get('surat-keluar', 'Sekertaris\SuratKeluar::index');
@@ -130,12 +130,12 @@ $routes->group('ketua', ['filter' => 'ketua'], function($routes)
 	$routes->get('/', 'Ketua\Dashboard::index');
 	$routes->post('/', 'Ketua\Dashboard::disposisi');
 	$routes->get('data_surat', 'Ketua\DataSurat::index');
-	$routes->get('detail/(:any)', 'Ketua\Dashboard::show');
+	$routes->get('detail/(:num)', 'Ketua\Dashboard::show/$1');
 
 	// surat masuk
 	$routes->get('surat-masuk', 'Ketua\SuratMasuk::index');
 	$routes->get('surat-masuk/print', 'Ketua\SuratMasuk::printSurat');
-	$routes->get('surat-masuk/lihat/(:any)', 'Ketua\SuratMasuk::lihat');
+	$routes->get('surat-masuk/lihat/(:num)', 'Ketua\SuratMasuk::lihat/$1');
 
 	// surat keluar
 	$routes->get('surat-keluar', 'Ketua\SuratKeluar::index');
@@ -155,8 +155,8 @@ $routes->group('kepala', ['filter' => 'kepala'], function($routes)
 	$routes->get('/', 'Kepala\Dashboard::index');
 	$routes->get('data_surat', 'Kepala\DataSurat::index');
 	
-	$routes->get('surat-masuk/lihat/(:any)', 'Ketua\SuratMasuk::lihat');
-	$routes->get('detail/(:any)', 'Kepala\Dashboard::show');
+	$routes->get('surat-masuk/lihat/(:num)', 'Ketua\SuratMasuk::lihat/$1');
+	$routes->get('detail/(:num)', 'Kepala\Dashboard::show/$1');
 
 	// ganti password
 	$routes->get('password', 'Kepala\AkunAdmin::index');

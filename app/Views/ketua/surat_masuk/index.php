@@ -45,7 +45,7 @@
                            </td>
                            <td>
                               <!-- tombol download -->
-                              <a href="/ketua/surat-masuk/lihat/<?= $surat['nomor_surat'] ?>" class="btn btn-sm btn-primary">Lihat</a>
+                              <a href="/ketua/surat-masuk/lihat/<?= $surat['id'] ?>" class="btn btn-sm btn-primary">Lihat</a>
                               <a href="/surat/<?= $folder ?>/<?= $surat['file_surat'] ?>" target="_blank" class="btn btn-success btn-sm">Download Surat</a>
                            </td>
                         </tr>

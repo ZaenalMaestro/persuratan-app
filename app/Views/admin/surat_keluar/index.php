@@ -46,7 +46,7 @@
                                  <?= $surat['status_komentar'] ?>
                               <?php endif; ?>
                            </td>
-                           <td width="27%">
+                           <td width="30%">
                               <?php if($surat['status_komentar'] == 'diterima') : ?>
                                  <a href="/admin/surat-keluar/lihat/<?= $surat['id'] ?>" class="btn btn-sm btn-primary">Lihat</a>
                                  <button type="button" disabled class="btn btn-sm btn-secondary">Edit</button>

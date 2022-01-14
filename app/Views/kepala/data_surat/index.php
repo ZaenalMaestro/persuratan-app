@@ -29,7 +29,7 @@
                            <td><?= $surat['tanggal'] ?></td>
                            <td width="30%"><?= $surat['perihal'] ?></td>
                            <td>
-                           <a href="/kepala/detail/<?= $surat['nomor_surat'] ?>" class="btn btn-sm btn-success">detail</a>
+                           <a href="/kepala/detail/<?= $surat['id'] ?>" class="btn btn-sm btn-success">detail</a>
                            </td>
                         </tr>
                      <?php endforeach ?>

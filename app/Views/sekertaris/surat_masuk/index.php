@@ -44,15 +44,15 @@
                                  <span class="text-success font-weight-bolder">-</span>
                               <?php endif ?>
                            </td>
-                           <td>
+                           <td width="20%">
                               <!-- === edit ===  -->
-                              <a href="/sekertaris/surat-masuk/lihat/<?= $surat['nomor_surat'] ?>" class="btn btn-sm btn-primary">Lihat</a>
-                              <a href="/sekertaris/surat-masuk/<?= $surat['nomor_surat'] ?>" class="btn btn-sm btn-success">Edit</a>
+                              <a href="/sekertaris/surat-masuk/lihat/<?= $surat['id'] ?>" class="btn btn-sm btn-primary">Lihat</a>
+                              <a href="/sekertaris/surat-masuk/<?= $surat['id'] ?>" class="btn btn-sm btn-success">Edit</a>
                               <!-- === hapus === -->
                               <form action="/sekertaris/surat-masuk" method="POST" class="d-inline">
                                  <?= csrf_field() ?>
                                  <input type="hidden" name="_method" value="DELETE">
-                                 <input type="hidden" name="nomor-surat" value="<?= $surat['nomor_surat'] ?>">
+                                 <input type="hidden" name="nomor-surat" value="<?= $surat['id'] ?>">
                                  <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('yakin hapus surat <?= $surat['penerima'] ?> : <?= $surat['perihal'] ?>?')">hapus</button>
                               </form>
                            </td>

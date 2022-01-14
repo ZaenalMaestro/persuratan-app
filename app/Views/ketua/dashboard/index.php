@@ -84,7 +84,7 @@
                            <td><?= $surat['tanggal'] ?></td>
                            <td width="30%"><?= $surat['perihal'] ?></td>
                            <td>
-                              <a href="/ketua/detail/<?= $surat['nomor_surat'] ?>" class="btn btn-sm btn-success">detail</a>
+                              <a href="/ketua/detail/<?= $surat['id'] ?>" class="btn btn-sm btn-success">detail</a>
                               <?php if($surat['disposisi'] == 'menunggu') : ?>   
                                  <button type="button" class="btn btn-sm btn-success btn-disposisi" data-toggle="modal" data-target="#disposisiModal" data-nomor-surat="<?= $surat['nomor_surat'] ?>">Disposisi</button>
                               <?php else: ?>

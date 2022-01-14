@@ -44,10 +44,10 @@
                                  <span class="text-success font-weight-bolder">-</span>
                               <?php endif ?>
                            </td>
-                           <td>
+                           <td width="18%">
                               <!-- === edit ===  -->
-                              <a href="/admin/surat-masuk/lihat/<?= $surat['nomor_surat'] ?>" class="btn btn-sm btn-primary">Lihat</a>
-                              <a href="/admin/surat-masuk/<?= $surat['nomor_surat'] ?>" class="btn btn-sm btn-success">Edit</a>
+                              <a href="/admin/surat-masuk/lihat/<?= $surat['id'] ?>" class="btn btn-sm btn-primary">Lihat</a>
+                              <a href="/admin/surat-masuk/<?= $surat['id'] ?>" class="btn btn-sm btn-success">Edit</a>
                               <!-- === hapus === -->
                               <form action="/admin/surat-masuk" method="POST" class="d-inline">
                                  <?= csrf_field() ?>

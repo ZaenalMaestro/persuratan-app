@@ -7,7 +7,7 @@ use CodeIgniter\Model;
 class SuratMasuk extends Model
 {
    protected $table      = 'surat_masuk';
-   protected $primaryKey = 'nomor_surat';
+   protected $primaryKey = 'id';
    protected $allowedFields = [
       'nomor_surat', 
       'nomor_induk', 

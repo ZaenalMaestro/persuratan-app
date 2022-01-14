@@ -34,17 +34,14 @@ class SuratMasuk extends BaseController
 		return view('sekertaris/surat_masuk/index', $data);
 	}
 
-	public function lihat()
+	public function lihat($id)
 	{
-		$segmant = $this->request->uri->getSegments();
-		$nomor_surat = "$segmant[3]/$segmant[4]/$segmant[5]/$segmant[6]";
-		$surat = $this->suratMasuk->where('nomor_surat', $nomor_surat)->first();
 		$data = [
-			'title' 					=> 'Edit Surat Masuk',
-			'role' 					=> 'Admin',
+			'title' 					=> 'Lihat Surat Masuk',
+			'role' 					=> 'Sekertaris',
 			'active_link' 			=> 'surat_masuk',
 			'validation'			=> $this->validation,
-			'surat_masuk'			=> $surat,
+			'surat_masuk'			=> $this->suratMasuk->where('id', $id)->first(),
 			'penerima_surat'		=> $this->dataUser->findAll()
 		];
 
@@ -79,13 +76,6 @@ class SuratMasuk extends BaseController
 			return redirect()->back()->withInput();
 		}
 
-		// validasi format surat
-		$segment_surat = explode('/', $request['nomor-surat']);
-		if(count($segment_surat) != 4) {
-			$this->validation->setError('nomor-surat', 'format surat tidak sesuai');
-			return redirect()->back()->withInput();
-		}
-
 		// validasi input
 		if(!$this->validation->run($request, 'surat_masuk')){
 			return redirect()->back()->withInput();
@@ -111,17 +101,14 @@ class SuratMasuk extends BaseController
 		return redirect()->to('/sekertaris/surat-masuk');
 	}
 
-	public function edit()
+	public function edit($id)
 	{
-		$segmant = $this->request->uri->getSegments();
-		$nomor_surat = "$segmant[2]/$segmant[3]/$segmant[4]/$segmant[5]";
-		$surat = $this->suratMasuk->where('nomor_surat', $nomor_surat)->first();
 		$data = [
 			'title' 					=> 'Edit Surat Masuk',
-			'role' 					=> 'Admin',
+			'role' 					=> 'Sekertaris',
 			'active_link' 			=> 'surat_masuk',
 			'validation'			=> $this->validation,
-			'surat_masuk'			=> $surat,
+			'surat_masuk'			=> $this->suratMasuk->where('id', $id)->first(),
 			'penerima_surat'		=> $this->dataUser->findAll()
 		];
 
@@ -135,32 +122,23 @@ class SuratMasuk extends BaseController
 		$fileSurat 	= $this->request->getFile('file-surat');
 		$nama_surat = $fileSurat->getRandomName();
 
+		// validasi ketersediaan nomor surat
+		if ($request['nomor-surat-lama'] != $request['nomor-surat-baru']) {
+			$nomor_surat_exist = $this->suratMasuk->where('nomor_surat', $request['nomor-surat-baru'])->first();
+			if($nomor_surat_exist) {
+				// validasi input nomor surat masuk/
+				$this->validation->setError('nomor-surat-baru', 'nomor surat telah digunakan');
+				return redirect()->back()->withInput();
+			}
+		}		
+
 		// validasi input
 		if(!$this->validation->run($request, 'form_edit_surat_masuk')){
 			return redirect()->back()->withInput();
 		}
 
-		// jika nomor surat diubah
-		$nomor_surat = $request['nomor-surat-lama'];
-		if ($request['nomor-surat-baru'] !== $request['nomor-surat-lama']) {
-			// validasi format surat
-			$segment_surat = explode('/', $request['nomor-surat-baru']);
-			if(count($segment_surat) !== 4) {
-				$this->validation->setError('nomor-surat-baru', 'format surat tidak sesuai');
-				return redirect()->back()->withInput();
-			}
-
-			// cek nomor surat
-			$nomor_surat_exist = $this->suratMasuk->where('nomor_surat', $request['nomor-surat-baru'])->first();
-			if($nomor_surat_exist) {
-				$this->validation->setError('nomor-surat-baru', 'nomor surat telah digunakan');
-				return redirect()->back()->withInput();
-			}
-			$nomor_surat = $request['nomor-surat-baru'];
-		}
-
 		$data = [
-			'nomor_surat' 	=> $nomor_surat,
+			'nomor_surat' 	=> $request['nomor-surat-baru'],
 			'tanggal' 		=> htmlspecialchars($request['tanggal']),
 			'penerima' 		=> htmlspecialchars($request['penerima']),
 			'perihal' 		=> htmlspecialchars($request['perihal']),
@@ -173,7 +151,7 @@ class SuratMasuk extends BaseController
 		}
 
 		// insert surat masuk
-		$this->suratMasuk->update($request['nomor-surat-lama'], $data);
+		$this->suratMasuk->update($request['id'], $data);
 
 		session()->setFlashData('pesan', 'Surat masuk berhasil diubah');
 		return redirect()->to('/sekertaris/surat-masuk');
