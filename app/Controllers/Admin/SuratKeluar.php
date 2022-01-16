@@ -90,9 +90,6 @@ class SuratKeluar extends BaseController
 	{
 		// redirect ke index surat keluar jika surat telah diterima
 		$surat = $this->suratKeluar->where('id', $id)->first();
-		if($surat['status_komentar'] == 'diterima') {
-			return redirect()->to('/admin/surat-keluar');
-		}
 
 		$data = [
 			'title' 					=> 'Edit Surat Keluar',
@@ -100,7 +97,7 @@ class SuratKeluar extends BaseController
 			'active_link' 			=> 'surat_keluar',
 			'validation'			=> $this->validation,
 			'templates'				=> $this->templateModel->findAll(),			
-			'penerima_surat'				=> $this->dataUser->findAll(),
+			'penerima_surat'		=> $this->dataUser->findAll(),
 			'surat_keluar'			=> $surat,
 		];
 

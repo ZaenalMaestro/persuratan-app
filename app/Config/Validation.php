@@ -40,10 +40,10 @@ class Validation
 	//--------------------------------------------------------------------
 	// Rules
 	public $disposisi = [
-		'nomor-surat' => [
+		'id-surat' => [
 			'rules'  => 'required',
 			'errors' => [
-				'required' => 'nomor surat tidak ditemukan.'
+				'required' => 'id surat tidak ditemukan.'
 			]
 		],
 		'penerima' => [

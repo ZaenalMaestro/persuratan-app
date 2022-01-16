@@ -71,8 +71,10 @@
                      <tr class="text-center">
                         <th>No</th>
                         <th>Nama</th>
+                        <th>Jenis Surat</th>
                         <th>Tanggal Surat</th>
                         <th>Perihal</th>
+                        <th>disposisi</th>
                         <th>Aksi</th>
                      </tr>
                   </thead>
@@ -81,15 +83,24 @@
                         <tr class="text-center">
                            <td><?= $no++ ?></td>
                            <td><?= $surat['penerima'] ?></td>
-                           <td><?= $surat['tanggal'] ?></td>
+                           <td><?= isset($surat['disposisi']) ? 'Surat Masuk' : 'Surat Keluar' ?></td>
+                           <td><?= isset($surat['tanggal']) ? $surat['tanggal'] : $surat['tanggal_surat'] ?></td>
                            <td width="30%"><?= $surat['perihal'] ?></td>
                            <td>
-                              <a href="/ketua/detail/<?= $surat['id'] ?>" class="btn btn-sm btn-success">detail</a>
-                              <?php if($surat['disposisi'] == 'menunggu') : ?>   
-                                 <button type="button" class="btn btn-sm btn-success btn-disposisi" data-toggle="modal" data-target="#disposisiModal" data-nomor-surat="<?= $surat['nomor_surat'] ?>">Disposisi</button>
-                              <?php else: ?>
-                                 <button type="button" class="btn btn-sm btn-secondary btn-disposisi" disabled>Disposisi</button>
-                              <?php endif ?>
+                              <?php if (isset($surat['disposisi'])) : ?>
+                                 <span><?= $surat['disposisi'] == 'disposisi' ? '<span class="text-success font-weight-bolder">✓</span>' : '<span class="text-warning font-weight-bolder">-</span>' ?></span>
+                              <?php else : ?>
+                                 <span class="text-warning font-weight-bolder">-</span>
+                              <?php endif; ?>
+                           </td>
+                           <td>
+                              <?php if (isset($surat['disposisi'])) : ?>
+                                 <a href="/ketua/detail/<?= $surat['id'] ?>" class="btn btn-sm btn-primary">detail</a>
+                                 <button type="button" class="btn btn-sm btn-success btn-disposisi" data-toggle="modal" data-target="#disposisiModal" data-id="<?= $surat['id'] ?>">Disposisi</button>
+                              <?php else : ?>
+                                 <a href="/ketua/surat-keluar/detail/<?= $surat['id'] ?>" class="btn btn-sm btn-primary">detail</a>
+                                 <button type="button" class="btn btn-sm btn-secondary" disabled>disposisi</button>
+                              <?php endif; ?>
                            </td>
                         </tr>
                      <?php endforeach ?>
@@ -117,13 +128,13 @@
          <!-- === form ==== -->
          <form action="/ketua" method="post">
             <?= csrf_field() ?>
-            <input type="hidden" name="nomor-surat" id="nomor-surat">
+            <input type="hidden" name="id-surat" id="id-surat">
             <div class="form-group">
                <label for="exampleFormControlSelect1">Nama Penerima</label>
                <select class="form-control <?= ($validation->hasError('penerima') ? 'is-invalid' : '') ?>" id="penerima" name="penerima">
                   <option value="">Pilih Penerima</option>
                   <?php foreach($penerima_surat as $penerima) : ?>
-                     <?php if(strtolower($penerima['nama_lengkap']) !== 'operator' ) : ?>
+                     <?php if(strtolower($penerima['nama_lengkap']) !== 'operator' && strtolower($penerima['nama_lengkap']) !== strtolower(session('nama'))) : ?>
                         <option value="<?= $penerima['nama_lengkap'] ?>"><?= $penerima['nama_lengkap'] ?></option>
                      <?php endif; ?>
                   <?php endforeach ?>

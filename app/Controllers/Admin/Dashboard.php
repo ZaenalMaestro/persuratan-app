@@ -22,14 +22,19 @@ class Dashboard extends BaseController
 		$suratMasuk 	= $this->suratMasuk->findAll();
 		$suratKeluar 	= $this->suratKeluar->findAll();
 
+		$semuaSurat = array_merge($suratMasuk, $suratKeluar);
+
 		// filter data surat hari ini
-		$suratHariIni = array_filter($suratMasuk, function($data) {
+		$suratHariIni = array_filter($semuaSurat, function($data) {
+			if (!isset($data['tanggal'])) {
+				return ($data['tanggal_surat'] == date('Y-m-d') && $data['status_komentar'] == 'diterima');
+			}
 			return ($data['tanggal'] == date('Y-m-d'));
 		});
 
 		// menampilkan data surat yang telah disposisi
 		$disposisi = array_filter($suratMasuk, function($data) {
-			return ($data['disposisi'] == 'disposisi');
+			return $data;
 		});
 
 		$data = [
@@ -54,26 +59,14 @@ class Dashboard extends BaseController
 			return redirect()->back()->withInput();
 		}
 		$data = [
-			'nomor_surat' 	=> $request['nomor-surat'],
+			'id' 	=> $request['id-surat'],
 			'penerima' 		=> $request['penerima'],
 			'disposisi'		=> 'disposisi'
 		];
-
-		$suratMasuk  = $this->suratMasuk->where('nomor_surat', $data['nomor_surat'])->first();
-		$suratKeluar = $this->suratKeluar->where('nomor_surat', $data['nomor_surat'])->first();
-
-		if($suratMasuk){
-			$this->suratMasuk->save($data);
-			session()->setFlashData('pesan', 'Surat masuk berhasil disposis kepada ' . $data['penerima']);
-			return redirect()->back();
-		}else if($suratKeluar){
-			$this->suratKeluar->save($data);
-			session()->setFlashData('pesan', 'Surat keluar berhasil disposis kepada ' . $data['penerima']);
-			return redirect()->back();
-		}else{
-			session()->setFlashData('pesan_error', 'Surat tidak dapat didisposisi !');
-			return redirect()->back();
-		}
+		
+		$this->suratMasuk->save($data);
+		session()->setFlashData('pesan', 'Surat masuk berhasil disposis kepada ' . $data['penerima']);
+		return redirect()->back();
 	}
 
 	

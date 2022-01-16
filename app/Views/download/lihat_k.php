@@ -9,7 +9,11 @@
    <link rel="stylesheet" href="/css/preview.css">
 </head>
 <body>
-   <a href="/ketua/surat-keluar" class="btn btn-print back">kembali</a>
+   <?php if (isset($type_view)) : ?>
+      <a href="/ketua" class="btn btn-print back">kembali</a>
+   <?php else : ?>
+      <a href="/ketua/surat-keluar" class="btn btn-print back">kembali</a>
+   <?php endif; ?>
    <h1 class="judul">Lihat Surat Keluar</h1>
    <div class="content">
       <img src="/assets/img/asset-unm/logo-unm-surat.PNG" alt="" class="img">

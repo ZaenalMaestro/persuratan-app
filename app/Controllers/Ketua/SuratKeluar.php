@@ -53,4 +53,15 @@ class SuratKeluar extends BaseController
 
 		return view('download/lihat_k', $data);
 	}
+
+	public function detail($id)
+	{
+		$data = [
+			'surat_keluar' => $this->suratKeluar->where('id', $id)->first(),
+			// type view detail => dihalaman lihat_k tombol kembali redirect ke dashboard
+			'type_view' => 'detail'
+		];
+
+		return view('download/lihat_k', $data);
+	}
 }

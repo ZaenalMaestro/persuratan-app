@@ -49,7 +49,7 @@
                            <td width="30%">
                               <?php if($surat['status_komentar'] == 'diterima') : ?>
                                  <a href="/admin/surat-keluar/lihat/<?= $surat['id'] ?>" class="btn btn-sm btn-primary">Lihat</a>
-                                 <button type="button" disabled class="btn btn-sm btn-secondary">Edit</button>
+                                 <a href="/admin/surat-keluar/<?= $surat['id'] ?>" class="btn btn-sm btn-success">Edit</a>
                                  <button type="button" disabled class="btn btn-sm btn-secondary">hapus</button>
                                  <a href="/admin/surat-keluar/download/<?= $surat['id'] ?>" target="_blank" class="btn btn-sm btn-info">Download</a>
                               <?php else : ?>

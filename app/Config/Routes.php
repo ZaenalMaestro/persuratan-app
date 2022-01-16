@@ -142,6 +142,7 @@ $routes->group('ketua', ['filter' => 'ketua'], function($routes)
 	$routes->get('surat-keluar/print', 'Ketua\SuratKeluar::printSurat');	
 	$routes->get('surat-keluar/download/(:num)', 'Ketua\SuratKeluar::download/$1');
 	$routes->get('surat-keluar/lihat/(:num)', 'Ketua\SuratKeluar::lihat/$1');
+	$routes->get('surat-keluar/detail/(:num)', 'Ketua\SuratKeluar::detail/$1');
 
 	// ganti password
 	$routes->get('password', 'Ketua\AkunAdmin::index');
