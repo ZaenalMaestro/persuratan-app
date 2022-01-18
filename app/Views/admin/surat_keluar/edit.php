@@ -177,17 +177,6 @@
          if(inputValid(data)) update(data)
       });
 
-      // validasi nomor surat
-      document.getElementById('nomor-surat').addEventListener('keyup', function() {
-         const tombol_submit =document.querySelector('#submit')
-         if (!cekFormatNomorSurat(this.value)) {
-            this.classList.add('is-invalid')
-            return tombol_submit.style.display = 'none'
-         }
-         this.classList.remove('is-invalid')
-         tombol_submit.style.display = 'block'
-      })
-
       // kirim perubahan data keserver
       function update(data)
       {
