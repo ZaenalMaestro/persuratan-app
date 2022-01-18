@@ -83,7 +83,8 @@ $routes->group('admin', ['filter' => 'admin'], function($routes)
 	$routes->get('template/create', 'Admin\TemplateSurat::create');
 	$routes->post('template/insert', 'Admin\TemplateSurat::insert');
 	$routes->get('template/edit/(:num)', 'Admin\TemplateSurat::edit/$1');
-	$routes->put('template/update', 'Admin\TemplateSurat::update');
+	$routes->put('template/update', 'Admin\TemplateSurat::update');	
+	$routes->get('surat-keluar/detail/(:num)', 'Ketua\SuratKeluar::detail/$1');
 
 	// ganti password
 	$routes->get('password', 'Admin\AkunAdmin::index');
